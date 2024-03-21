@@ -30,7 +30,7 @@
                         <div class="row align-items-end">
                             <div class="col-lg-3 mb-3">
                                <label class="form-label" style="font-weight: 500;">Search</label>
-                               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                               <input class="form-control me-2 shadow-none" type="search" placeholder="Search" aria-label="Search">
                             </div>
                             <div class="col-lg-3 mb-3">
                                 <label class="form-label" style="font-weight: 500;">Check-in</label>
