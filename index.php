@@ -220,7 +220,7 @@
         </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <strong>Making a parking reservation is quick and easy. Simply visit our website, select your desired location, date, and duration, and follow the prompts to complete your reservation. You will receive a confirmation email with all the details.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+              <strong>Making a parking reservation is quick and easy. Simply visit our website, select your desired location, date, and duration, and follow the prompts to complete your reservation. You will receive a confirmation email with all the details.</strong> 
             </div>
           </div>
       </div>
@@ -232,7 +232,7 @@
         </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <strong>Yes, you can modify or cancel your parking reservation depending on the terms and conditions of the specific parking location. Log in to your account on our website and navigate to the reservation management section to make any changes or cancellations</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <strong>Yes, you can modify or cancel your parking reservation depending on the terms and conditions of the specific parking location. Log in to your account on our website and navigate to the reservation management section to make any changes or cancellations</strong> 
             </div>
           </div>
       </div>
@@ -244,7 +244,7 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <strong>We understand that travel plans can change. In most cases, there is a grace period for early or late arrivals. However, it is always recommended to adhere to your reserved parking time to ensure a smooth experience. Check the specific parking location's terms and conditions for more details</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <strong>We understand that travel plans can change. In most cases, there is a grace period for early or late arrivals. However, it is always recommended to adhere to your reserved parking time to ensure a smooth experience. Check the specific parking location's terms and conditions for more details</strong> 
           </div>
         </div>
       </div>
@@ -256,7 +256,7 @@
         </h2>
         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <strong>Yes, we prioritize the safety and security of your vehicle. Our parking facilities are carefully selected and equipped with advanced security measures, including surveillance cameras, well-lit areas, and on-site personnel. However, we recommend not leaving any valuable items in plain sight inside your vehicle</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <strong>Yes, we prioritize the safety and security of your vehicle. Our parking facilities are carefully selected and equipped with advanced security measures, including surveillance cameras, well-lit areas, and on-site personnel. However, we recommend not leaving any valuable items in plain sight inside your vehicle</strong>         
           </div>
         </div>
       </div>
@@ -267,7 +267,7 @@
         </h2>
         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <strong>Some parking facilities may have height or size restrictions. During the reservation process, you will be able to view any limitations or restrictions specific to the chosen parking location. If you have a larger or oversized vehicle, it is recommended to check the available options or contact our customer support for assistance</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <strong>Some parking facilities may have height or size restrictions. During the reservation process, you will be able to view any limitations or restrictions specific to the chosen parking location. If you have a larger or oversized vehicle, it is recommended to check the available options or contact our customer support for assistance</strong>          
           </div>
         </div>
       </div>
@@ -279,7 +279,7 @@
         </h2>
         <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <strong>We accept various payment methods, including major credit cards, debit cards, and digital wallets. The accepted payment options will be displayed during the reservation process. Rest assured that your payment information is processed securely</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <strong>We accept various payment methods, including major credit cards, debit cards, and digital wallets. The accepted payment options will be displayed during the reservation process. Rest assured that your payment information is processed securely</strong>           
           </div>
         </div>
       </div>
