@@ -39,7 +39,7 @@
         $frm_data = filteration($_POST);
         // echo"<h1>$frm_data[admin_id]</h1>";
         // echo"<h1>$frm_data[admin_pass]</h1>";
-        $query = "SELECT * FROM `Admin` WHERE `admin_id`=? AND `admin_pass`=?";
+        $query = "SELECT * FROM `admin` WHERE `admin_id`=? AND `admin_pass`=?";
         $values=[$frm_data['admin_id'],$frm_data['admin_pass']];
         // $datatypes ="ss";
         $res = select($query,$values,"ss");
