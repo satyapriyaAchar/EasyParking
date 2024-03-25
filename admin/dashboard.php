@@ -1,7 +1,7 @@
 <?php 
   require('inc/essential.php');
   adminLogin();
-  session_regenerate_id(true);
+  session_regenerate_id(true); // new session id created for security
 
 ?>
 <!DOCTYPE html>
