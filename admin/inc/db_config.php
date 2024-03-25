@@ -1,7 +1,7 @@
 <?php
 
 $hname = 'localhost'; // variable
-$uname = 'root';
+$uname = 'root'; //user
 $pass = '';   //root password
 $db = 'EasyParking'; // database name
 

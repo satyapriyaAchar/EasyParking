@@ -1,4 +1,4 @@
- .login-form{  /* making the form in center */
+.login-form{  /* making the form in center */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -9,7 +9,7 @@
     background-color: white;
     overflow: hidden;
 }
-.submit-btn{
+/* .submit-btn{
     height: 35px;
     width: 60px;
     cursor: pointer;
@@ -18,4 +18,4 @@
     border: 0;
     outline: none;
     border-radius: 5px;
-}
+} */
