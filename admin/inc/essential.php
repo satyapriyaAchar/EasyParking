@@ -1,13 +1,13 @@
 <?php
 
 function adminLogin(){
-    session_start();
+    session_start(); //to check validation
     if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin'] == true)){
         echo"<script>
-          window.location.href='$url';
+          window.location.href='index.php';
         </script>"; 
     }
-    session_regenerate_id(true);
+    session_regenerate_id(true); //new session id created for security
 }
 
   function redirect($url){

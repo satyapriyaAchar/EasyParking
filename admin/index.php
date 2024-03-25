@@ -1,6 +1,6 @@
 <?php
-    require('inc/essential.php'); 
-    require('inc/db_config.php'); 
+    require('inc/essential.php'); // small essential function like alert,
+    require('inc/db_config.php'); // connection to db
 
     session_start();
     if((isset($_SESSION['adminLogin']) && $_SESSION['adminLogin'] == true)){
@@ -31,23 +31,23 @@
             </div>
         </form>
     </div>
+
     <?php
-      
-      if(isset($_POST['login']))
+      if(isset($_POST['login'])) //if above button 'login' click
       {
-        $frm_data = filteration($_POST);
+        $frm_data = filteration($_POST); //calling this function and pass POST array to db_config.php  
         // echo"<h1>$frm_data[admin_id]</h1>";
         // echo"<h1>$frm_data[admin_pass]</h1>";
-        $query = "SELECT * FROM `admin` WHERE `admin_id`=? AND `admin_pass`=?";
-        $values=[$frm_data['admin_id'],$frm_data['admin_pass']];
+        $query = "SELECT * FROM `admin` WHERE `admin_id`=? AND `admin_pass`=?"; // prepare statement
+        $values=[$frm_data['admin_id'],$frm_data['admin_pass']]; //accordig to ?
         // $datatypes ="ss";
-        $res = select($query,$values,"ss");
+        $res = select($query,$values,"ss"); //calling function select and pass parameter "ss" -> string string to db_config.php
         // print_r($res); 
         if($res->num_rows == 1){
             $row = mysqli_fetch_assoc($res);
             $_SESSION['adminLogin'] = true;
             $_SESSION['adminId'] = $row['sr_no'];
-            redirect('dashboard.php');
+            redirect('dashboard.php'); //calling redirect function on essential.php
         }     
         else{
             alert('error','Login failed - Invalid Credentials!');
