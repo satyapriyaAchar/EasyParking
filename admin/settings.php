@@ -32,11 +32,12 @@
                 </button>
               </div>
               <h6 class="card-subtitle mb-1 fw-bold">Site Title</h6>
-              <p class="card-text">content</p>
-              <h6 class="card-subtitle mb-1 fw-bold">About Us</h6>
-              <p class="card-text">content</p>
+              <p class="card-text" id="site_title"></p>
+              <h6 class="card-subtitle mb-1 fw-bold" >About Us</h6>
+              <p class="card-text" id="site_about"></p>
             </div>
           </div>
+          <!------- popup for edit dynamically ------->
           <div class="modal fade" id="general-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
               <form>
@@ -47,25 +48,93 @@
                   <div class="modal-body">
                     <div class="mb-3">
                       <label class="form-label">Site Title</label>
-                      <input type="text" name="site_title" class="form-control shadow-none">
+                      <input type="text" name="site_title" id="site_title_inp" class="form-control shadow-none">
                     </div>
                     <div class="mb-3">
                       <label class="form-label">About Us</label>
-                      <textarea name="site_title" class="form-control shadow-none" rows="6"></textarea>
+                      <textarea name="site_about" id="site_about_inp" class="form-control shadow-none" rows="6"></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary shadow-none">Save</button>
+                    <button type="button" onclick="site_title.value = general_data.site_title, site_about.value =general_data.site_about" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" onclick="upd_general(site_title.value,site_about.value)" class="btn btn-primary shadow-none">Save</button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
+
         </div>
       </div>
     </div>
 
     <?php require('inc/scripts.php'); ?>
+
+    <script>
+
+      let general_data;
+      // fetching website title and about from database
+      function get_general()
+      {
+        let site_title = document.getElementById('site_title');
+        let site_about = document.getElementById('site_about');
+
+        let site_title_inp = document.getElementById('site_title_inp');
+        let site_about_inp = document.getElementById('site_about_inp');
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/settings_crud.php",true);
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded') ;
+        
+        xhr.onload = function(){
+          general_data = JSON.parse(this.responseText);
+          // console.log(general_data);
+          site_title.innerText = general_data.site_title;
+          site_about.innerText = general_data.site_about;
+  
+          // on the alert same data
+          site_title_inp.value = general_data.site_title;
+          site_about_inp.value = general_data.site_about;
+
+        }
+        xhr.send('get_general');
+      }
+    
+      // change/update website title and about
+      function upd_general(site_title_val, site_about_val)
+      {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/settings_crud.php",true);
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded') ;
+        
+        xhr.onload = function(){
+
+          var myModal = document.getElementById('general-s');
+          var modal = bootstrap.Modal.getInstance(myModal);
+          modal.hide();
+          // console.log(this.responseText);
+
+          if(this.responseText == 1)
+          {
+            alert('success','changes saved!');
+            // console.log("data updated");
+            get_general();
+          }
+          else
+          {
+            alert('error','No changes made!');
+            // console.log("no changes made");
+          }
+          
+
+        }
+        xhr.send('site_title='+site_title_val+'&site_about='+site_about_val+'&upd_general');
+      }
+
+      window.onload = function(){
+        get_general();
+      }
+    </script>
+
 </body>
 </html>
