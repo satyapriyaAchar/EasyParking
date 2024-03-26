@@ -22,7 +22,7 @@
           <h3 class="mb-4">SETTING</h3>
 
           <!---------- General Settings ------------->
-          <div class="card">
+          <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
               <div class="d-flex align-item-center justify-content-between mb-3">
                 <h5 class="card-title m-0">General Settings</h5>
@@ -64,6 +64,23 @@
             </div>
           </div>
 
+          <!----------- shutdown website ---------->
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-item-center justify-content-between mb-3">
+                <h5 class="card-title m-0">Shutdown Website</h5>
+                <div class="form-check form-switch">
+                  <form>
+                  <input onchange="upd_shutdown(this.value)" class="form-check-input shadow-none" type="checkbox" id="shutdown_toggle">
+                  </form>
+                </div>
+              </div>
+              <p class="card-text" >
+                No customers will allowed to book parking place, when shutdown mode is turned on.
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -81,6 +98,8 @@
 
         let site_title_inp = document.getElementById('site_title_inp');
         let site_about_inp = document.getElementById('site_about_inp');
+        let shutdown_toggle = document.getElementById('shutdown_toggle');
+
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST","ajax/settings_crud.php",true);
@@ -95,6 +114,15 @@
           // on the alert same data
           site_title_inp.value = general_data.site_title;
           site_about_inp.value = general_data.site_about;
+
+          if(general_data.shutdown == 0){
+            shutdown_toggle.checked = false;
+            shutdown_toggle.value = 0;
+          }
+          else{
+            shutdown_toggle.checked = true;
+            shutdown_toggle.value = 1;
+          }
 
         }
         xhr.send('get_general');
@@ -129,6 +157,31 @@
 
         }
         xhr.send('site_title='+site_title_val+'&site_about='+site_about_val+'&upd_general');
+      }
+
+      function upd_shutdown(val)
+      {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/settings_crud.php",true);
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded') ;
+        
+        xhr.onload = function(){
+          if(this.responseText == 1 && general_data.shutdown == 0) 
+          {
+            alert('success','site has been shutdown!');
+            // console.log("data updated");
+            
+          }
+          else
+          {
+            alert('success','site is on!');
+            // console.log("no changes made");
+          }
+          get_general();
+          
+
+        }
+        xhr.send('upd_shutdown='+val);
       }
 
       window.onload = function(){
