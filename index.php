@@ -66,7 +66,7 @@
 <!-- ---------- Parking -------------- -->
 
 <div id="Parking" class="pt-5">
- <div class="container">
+ <div class="container shadow p-3 mb-5 bg-body rounded">
  <h1 class="sub-title mt-5 ">Parking</h1>
    <div class="row">
     <div class="col-lg-4 col-md-6 my-3">
@@ -172,7 +172,7 @@
 
 <!-- ---------------about----------------- -->
 <div id="about" class="pt-5">
-  <div class="container">
+  <div class="container shadow p-3 mb-5 bg-body rounded">
     <div class="row2">
       <h1 class="sub-title mt-5 mb-5">About This Website</h1>
       <p>Welcome to EasyParking - Your Ultimate Vehicle Parking Solution!<br><br>At EasyParking, we understand the frustrations and challenges that come with finding a convenient and secure parking spot for your vehicle. That's why we've designed a cutting-edge parking system that takes the hassle out of parking, giving you peace of mind and a seamless parking experience.<br><br>With EasyParking, you can say goodbye to circling around busy streets or wasting time searching for available parking spaces. Our advanced technology allows you to effortlessly locate and reserve parking spots in real-time, right from the convenience of your phone or computer.</p>
@@ -182,7 +182,7 @@
 
 <!-- ----------------------------services----------------------- -->
 <div id="services" class="pt-5">
-  <div class="container">
+  <div class="container shadow p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5">Our Services</h1>
     <div class="services-list">
       <div>
@@ -209,7 +209,7 @@
 
 <!-- ---------------faq------------------------- -->
 <div id="question" class="pt-5">
-  <div class="container">
+  <div class="container shadow p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5 ">Frequently Asked Questions</h1>
     <div class="accordion mt-5" id="accordionExample">
       <div class="accordion-item">
@@ -290,13 +290,15 @@
 
 <!-- -------------------contact------------------- -->
 <div id="contact" class="pt-5">
-  <div class="container">
+  <div class="container shadow p-3 mb-5 bg-body rounded">
     <div class="row2">
       <div class="contact-left">
         <h1 class="sub-title mt-5">Contact Us</h1>
         <h2>Address</h2>
-        <p>CVJ6+9PC,Kolaghat Thermal Power Plant Township,Kolaghat,West Bengal 721171</p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.0447607907377!2d87.8592481742656!3d22.427341038280616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02980f71daa971%3A0xd8a291eb93011bcf!2sCollege%20Of%20Engineering%20%26%20Management%2C%20Kolaghat!5e0!3m2!1sen!2sin!4v1702967233669!5m2!1sen!2sin" width="700" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p >CVJ6+9PC,Kolaghat Thermal Power Plant Township,Kolaghat,West Bengal 721171</p>
+        <div class="gmap">
+        <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.0447607907377!2d87.8592481742656!3d22.427341038280616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02980f71daa971%3A0xd8a291eb93011bcf!2sCollege%20Of%20Engineering%20%26%20Management%2C%20Kolaghat!5e0!3m2!1sen!2sin!4v1702967233669!5m2!1sen!2sin" width="80%" height="300px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
         <h2><i class="fa-solid fa-envelope"></i>Email</h2>
         <p>easyparking@gmail.com</p>
         <h2><i class="fa-solid fa-phone"></i>Phone</h2>

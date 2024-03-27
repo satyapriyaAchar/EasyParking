@@ -28,7 +28,12 @@
     /* display: flex;
     align-items: center;
     justify-content: center; */
+    
 }
+/* .bg-body {
+    background-color: #f1f1eb !important;
+} */
+
 .submit-btn{
     padding: 10px 30px;
     cursor: pointer;
@@ -227,8 +232,10 @@ nav .fa-solid{
     .copyright{
         font-size: 15px;
     }
+    
 
 }
+
 #msg{
     color:greenyellow;
     margin-top: -40px;

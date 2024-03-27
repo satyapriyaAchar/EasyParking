@@ -116,20 +116,21 @@
                     </p>
                   </div>
                 </div>
+
                 <!-- socials links -->
                 <div class="col-lg-6">
                   <div class="mb-4">
                     <h6 class="card-subtitle mb-1 fw-bold" >Social Links</h6>
-                    <p class="card-text mb-1">
-                      <i class="fa-brands fa-linkedin" style="color: blue;" aria-hidden="true"></i>                    <span id="pn1"></span>
+                    <p class="card-text mb-1" id="linkd">
+                      <i class="fa-brands fa-linkedin" style="color: blue;" aria-hidden="true"></i>
                     </p>
-                    <p class="card-text mb-1">
+                    <p class="card-text mb-1" id="tw">
                       <i class="fa-brands fa-twitter" aria-hidden="true"></i>
                     </p>
-                    <p class="card-text mb-1">
+                    <p class="card-text mb-1" id="yt">
                       <i class="fa-brands fa-youtube" style="color: red;" aria-hidden="true"></i>
                     </p>
-                    <p class="card-text mb-1">
+                    <p class="card-text mb-1" id="wp">
                       <i class="fa-brands fa-whatsapp" style="color: green;" aria-hidden="true"></i> 
                     </p>
                   </div>
