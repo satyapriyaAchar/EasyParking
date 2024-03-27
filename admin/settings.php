@@ -40,24 +40,24 @@
           <!------- popup for edit dynamically ------->
           <div class="modal fade" id="general-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
-              <form>
+              <form id="general_s_form">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">General Settings</h5>
                   </div>
                   <div class="modal-body">
                     <div class="mb-3">
-                      <label class="form-label">Site Title</label>
-                      <input type="text" name="site_title" id="site_title_inp" class="form-control shadow-none">
+                      <label class="form-label fw-bold">Site Title</label>
+                      <input type="text" name="site_title" id="site_title_inp" class="form-control shadow-none" required>
                     </div>
                     <div class="mb-3">
-                      <label class="form-label">About Us</label>
-                      <textarea name="site_about" id="site_about_inp" class="form-control shadow-none" rows="6"></textarea>
+                      <label class="form-label fw-bold">About Us</label>
+                      <textarea name="site_about" id="site_about_inp" class="form-control shadow-none" rows="6" required></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" onclick="site_title.value = general_data.site_title, site_about.value =general_data.site_about" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" onclick="upd_general(site_title.value,site_about.value)" class="btn btn-primary shadow-none">Save</button>
+                    <button type="submit" class="btn btn-primary shadow-none">Save</button>
                   </div>
                 </div>
               </form>
@@ -65,7 +65,7 @@
           </div>
 
           <!----------- shutdown website ---------->
-          <div class="card border-0 shadow-sm">
+          <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
               <div class="d-flex align-item-center justify-content-between mb-3">
                 <h5 class="card-title m-0">Shutdown Website</h5>
@@ -81,6 +81,67 @@
             </div>
           </div>
 
+          <!----------- contacts settings ---------->
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <div class="d-flex align-item-center justify-content-between mb-3">
+                <h5 class="card-title m-0">Contacts Settings</h5>
+                <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#contacts-s">
+                <i class="bi bi-pencil-square"></i>
+                Edit
+                </button>
+              </div>
+              <div class="row">
+                <!-- address,phn no, google map,email -->
+                <div class="col-lg-6">
+                  <div class="mb-4">
+                    <h6 class="card-subtitle mb-1 fw-bold">Address</h6>
+                    <p class="card-text" id="address"></p>
+                  </div>
+                  <div class="mb-4">
+                    <h6 class="card-subtitle mb-1 fw-bold" >Google Map</h6>
+                    <p class="card-text" id="gmap"></p>
+                  </div>
+                  <div class="mb-4">
+                    <h6 class="card-subtitle mb-1 fw-bold" >Phone Number</h6>
+                    <p class="card-text" id="pn1">
+                    <i class="fa-solid fa-phone" style="color: green;" aria-hidden="true"></i>
+                    <!-- <span id="pn1"></span> -->
+                    </p>
+                  </div>
+                  <div class="mb-4">
+                    <h6 class="card-subtitle mb-1 fw-bold" >Email</h6>
+                    <p class="card-text" id="email">
+                    <i class="fa-solid fa-envelope" style="color: orange;" aria-hidden="true"></i>
+                    </p>
+                  </div>
+                </div>
+                <!-- socials links -->
+                <div class="col-lg-6">
+                  <div class="mb-4">
+                    <h6 class="card-subtitle mb-1 fw-bold" >Social Links</h6>
+                    <p class="card-text mb-1">
+                      <i class="fa-brands fa-linkedin" style="color: blue;" aria-hidden="true"></i>                    <span id="pn1"></span>
+                    </p>
+                    <p class="card-text mb-1">
+                      <i class="fa-brands fa-twitter" aria-hidden="true"></i>
+                    </p>
+                    <p class="card-text mb-1">
+                      <i class="fa-brands fa-youtube" style="color: red;" aria-hidden="true"></i>
+                    </p>
+                    <p class="card-text mb-1">
+                      <i class="fa-brands fa-whatsapp" style="color: green;" aria-hidden="true"></i> 
+                    </p>
+                  </div>
+                  <div class="mb-4">
+                    <h6 class="card-subtitle mb-1 fw-bold" >Links</h6>
+                    <iframe id="iframe" class="border p-2 w-100" loading="lazy"></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -90,14 +151,17 @@
     <script>
 
       let general_data;
+
+      let general_s_form = document.getElementById('general_s_form');
+      let site_title_inp = document.getElementById('site_title_inp');
+      let site_about_inp = document.getElementById('site_about_inp');
       // fetching website title and about from database
       function get_general()
       {
         let site_title = document.getElementById('site_title');
         let site_about = document.getElementById('site_about');
 
-        let site_title_inp = document.getElementById('site_title_inp');
-        let site_about_inp = document.getElementById('site_about_inp');
+        
         let shutdown_toggle = document.getElementById('shutdown_toggle');
 
 
@@ -127,6 +191,11 @@
         }
         xhr.send('get_general');
       }
+
+      general_s_form.addEventListener('submit',function(e){
+          e.preventDefault();
+          upd_general(site_title_inp.value,site_about_inp.value);
+      });
     
       // change/update website title and about
       function upd_general(site_title_val, site_about_val)
