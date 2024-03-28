@@ -6,14 +6,15 @@
 #dashboard-menu{
     position: fixed;
     height: 100%;
-    
+    z-index: 11;
+   
 }   
 
 @media screen and (max-width: 991px){
     #dashboard-menu{
         height: auto;
         width: 100%;
-        z-index: 11;
+        
     }
     #main-content{
         margin-top: 60px;
