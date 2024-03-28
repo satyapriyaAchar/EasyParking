@@ -151,7 +151,7 @@
 
     <script>
 
-      let general_data;
+      let general_data,contacts_data;
 
       let general_s_form = document.getElementById('general_s_form');
       let site_title_inp = document.getElementById('site_title_inp');
@@ -253,9 +253,27 @@
         }
         xhr.send('upd_shutdown='+val);
       }
+      // fetching website contacts from database
+      function get_contacts()
+      {
+        let contacts_p_id = ['address','gmap','pn1','email','linkd','tw','yt','wp'];
+        let iframe = document.getElementById('iframe')
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/settings_crud.php",true);
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded') ;
+        
+        xhr.onload = function(){
+          contacts_data = JSON.parse(this.responseText);
+          console.log(contacts_data);
+          
+
+        }
+        xhr.send('get_contacts');
+      }
 
       window.onload = function(){
         get_general();
+        get_contacts();
       }
     </script>
 
