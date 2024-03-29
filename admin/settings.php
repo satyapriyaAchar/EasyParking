@@ -155,7 +155,7 @@
           <!------- popup for edit dynamically(modal) for contact ------->
           <div class="modal fade" id="contacts-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
-              <form id="general_s_form">
+              <form id="contacts_s_form">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">Contacts Settings</h5>
@@ -237,17 +237,9 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="mb-3">
-                      <label class="form-label fw-bold">Address</label>
-                      <input type="text" name="site_title" id="address_inp" class="form-control shadow-none" required>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label fw-bold">Address</label>
-                      <textarea name="site_about" id="address_inp" class="form-control shadow-none" rows="6" required></textarea>
-                    </div> -->
                   </div>
                   <div class="modal-footer">
-                    <button type="button" onclick="site_title.value = general_data.site_title, site_about.value =general_data.site_about" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" onclick="contacts_inp(contacts_data)" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary shadow-none">Save</button>
                   </div>
                 </div>
@@ -267,6 +259,9 @@
       let general_s_form = document.getElementById('general_s_form');
       let site_title_inp = document.getElementById('site_title_inp');
       let site_about_inp = document.getElementById('site_about_inp');
+      
+      let contacts_s_form = document.getElementById('contacts_s_form');
+
       // fetching website title and about from database
       function get_general()
       {
@@ -317,7 +312,6 @@
         xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded') ;
         
         xhr.onload = function(){
-
           var myModal = document.getElementById('general-s');
           var modal = bootstrap.Modal.getInstance(myModal);
           modal.hide();
@@ -367,8 +361,10 @@
       // fetching website contacts from database
       function get_contacts()
       {
+
         let contacts_p_id = ['address','gmap','pn1','email','linkd','tw','yt','wp'];
         let iframe = document.getElementById('iframe')
+        
         let xhr = new XMLHttpRequest();
         xhr.open("POST","ajax/settings_crud.php",true);
         xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded') ;
@@ -383,10 +379,66 @@
             document.getElementById(contacts_p_id[i]).innerText = contacts_data[i+1];
           }
           iframe.src = contacts_data[(contacts_p_id.length)+1];
+
+          contacts_inp(contacts_data);
           
 
         }
         xhr.send('get_contacts');
+      }
+      function contacts_inp(data)
+      {
+        let contacts_inp_id = ['address_inp','gmap_inp','pn1_inp','email_inp','linkd_inp','tw_inp','yt_inp','wp_inp','iframe_inp'];
+        
+        for(i=0;i<contacts_inp_id.length;i++)
+        {
+          document.getElementById(contacts_inp_id[i]).value = data[i+1];
+          // console.log(data[i+1]);
+        }
+      }
+
+      contacts_s_form.addEventListener('submit',function(e){
+          e.preventDefault();
+          upd_contacts();
+      });
+
+      function upd_contacts()
+      {
+        let index = ['address','gmap','pn1','email','linkd','tw','yt','wp','iframe'];
+        let contacts_inp_id = ['address_inp','gmap_inp','pn1_inp','email_inp','linkd_inp','tw_inp','yt_inp','wp_inp','iframe_inp'];
+
+        let data_str = "";
+
+        for(i=0;i<index.length;i++)
+        {
+          data_str += index[i] + "=" + document.getElementById(contacts_inp_id[i]).value + '&';
+        }
+        // console.log(data_str);
+        data_str += "upd_contacts";
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/settings_crud.php",true);
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded') ;
+
+        xhr.onload = function(){
+          var myModal = document.getElementById('contacts-s');
+          var modal = bootstrap.Modal.getInstance(myModal);
+          modal.hide();
+          if(this.responseText == 1) 
+          {
+            alert('success','Changes saved');
+            // console.log("data updated");
+            get_contacts();
+            
+          }
+          else
+          {
+            alert('error','No changes made!');
+            // console.log("no changes made");
+          }
+         
+        }
+        xhr.send(data_str);
       }
 
       window.onload = function(){

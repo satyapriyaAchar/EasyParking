@@ -44,4 +44,15 @@
         $json_data = json_encode($data);
         echo $json_data;
     }
+
+    if(isset($_POST['upd_contacts']))
+    {
+        $frm_data = filteration($_POST);
+        
+        $q = "UPDATE `contact_details` SET `address`=?,`gmap`=?,`pn1`=?,`email`=?,`linkd`=?,`tw`=?,`yt`=?,`wp`=?,`iframe`=? WHERE `sr_no` = ?";
+        $values = [$frm_data['address'],$frm_data['gmap'],$frm_data['pn1'],$frm_data['email'],$frm_data['linkd'],$frm_data['tw'],$frm_data['yt'],$frm_data['wp'],$frm_data['iframe'],1];
+        $res = update($q,$values,'sssssssssi');
+        echo $res;
+
+    }
 ?>
