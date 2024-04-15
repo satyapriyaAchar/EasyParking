@@ -170,7 +170,7 @@
  </div>
 </div>
 
-<!-- ---------------about----------------- -->
+<!-- ---------------about section----------------- -->
 <div id="about" class="pt-5">
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <div class="row2">
@@ -180,7 +180,7 @@
   </div>
 </div>
 
-<!-- ----------------------------services----------------------- -->
+<!-- ----------------------------services section----------------------- -->
 <div id="services" class="pt-5">
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5">Our Services</h1>
@@ -207,7 +207,7 @@
   </div>
 </div>
 
-<!-- ---------------faq------------------------- -->
+<!-- ---------------faq section------------------------- -->
 <div id="question" class="pt-5">
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5 ">Frequently Asked Questions</h1>
@@ -288,7 +288,7 @@
   </div>
 </div>
 
-<!-- -------------------contact------------------- -->
+<!-- -------------------contact section------------------- -->
 <div id="contact" class="pt-5">
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <div class="row2">
