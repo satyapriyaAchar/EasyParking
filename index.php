@@ -136,7 +136,7 @@
        <img src="images/2.jpg" class="card-img-top" alt="...">
         <div class="card-body">
          <h5>Four Wheeler</h5>
-         <h6 class="mb-4">₹20 per Hour</h6>
+         <h6 class="mb-4">₹30 per Hour</h6>
          <div class="features mb-4">
            <h6 class="mb-1">Facilities</h6>
            <span class="badge rounded-pill bg-light text-dark text-wrap">
