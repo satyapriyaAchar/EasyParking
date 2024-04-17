@@ -171,11 +171,17 @@
 </div>
 
 <!-- ---------------about section----------------- -->
+<?php
+  $about_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
+  $values = [1];
+  $about_r = mysqli_fetch_assoc(select($about_q,$values,'i'));
+  
+?>
 <div id="about" class="pt-5">
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <div class="row2">
       <h1 class="sub-title mt-5 mb-5">About This Website</h1>
-      <p>Welcome to EasyParking - Your Ultimate Vehicle Parking Solution!<br><br>At EasyParking, we understand the frustrations and challenges that come with finding a convenient and secure parking spot for your vehicle. That's why we've designed a cutting-edge parking system that takes the hassle out of parking, giving you peace of mind and a seamless parking experience.<br><br>With EasyParking, you can say goodbye to circling around busy streets or wasting time searching for available parking spaces. Our advanced technology allows you to effortlessly locate and reserve parking spots in real-time, right from the convenience of your phone or computer.</p>
+      <p><?php echo $about_r['site_about']?></p>
     </div>
   </div>
 </div>

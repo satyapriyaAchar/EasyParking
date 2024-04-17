@@ -13,10 +13,11 @@ if(!$con){
 
 function filteration($data){           // common filteration
     foreach($data as $key => $value){
-        $data[$key] = trim($value); //extra space remove
-        $data[$key] = stripslashes($value); //back slash remove
-        $data[$key] = htmlspecialchars($value);// special char convert to html entities
-        $data[$key] = strip_tags($value); //html tag remove
+        $value = trim($value); //extra space remove
+        $value = stripslashes($value); //back slash remove
+        $value = strip_tags($value); //html tag remove
+        $value = htmlspecialchars($value);// special char convert to html entities
+        $data[$key] = $value;
     }
     return $data;  // return to index.php filteration call
 }

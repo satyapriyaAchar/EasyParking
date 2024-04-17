@@ -15,10 +15,10 @@
                 <a class="nav-link text-white" href="dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link text-white" href="#">Parking</a>
+                <a class="nav-link text-white" href="parking.php">Parking</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link text-white" href="#">User</a>
+                <a class="nav-link text-white" href="users.php">User</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link text-white" href="settings.php">Settings</a>

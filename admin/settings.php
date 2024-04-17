@@ -188,7 +188,7 @@
                                 <span class="input-group-text">
                                   <i class="fa-solid fa-phone" style="color: green;" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" name="pn1" id="pn1_inp" class="form-control shadow-none" required>
+                                <input type="number" name="pn1" id="pn1_inp" class="form-control shadow-none" required>
                               </div>
                             </div>
                             <div class="mb-3">
