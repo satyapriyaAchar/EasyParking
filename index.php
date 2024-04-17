@@ -289,25 +289,31 @@
 </div>
 
 <!-- -------------------contact section------------------- -->
+
+<?php
+  $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
+  $values = [1];
+  $contact_r = mysqli_fetch_assoc(select($contact_q,$values,'i'));
+?>
 <div id="contact" class="pt-5">
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <div class="row2">
       <div class="contact-left">
         <h1 class="sub-title mt-5">Contact Us</h1>
         <h2>Address</h2>
-        <p >CVJ6+9PC,Kolaghat Thermal Power Plant Township,Kolaghat,West Bengal 721171</p>
+        <p ><?php echo $contact_r['address']?></p>
         <div class="gmap">
-        <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.0447607907377!2d87.8592481742656!3d22.427341038280616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02980f71daa971%3A0xd8a291eb93011bcf!2sCollege%20Of%20Engineering%20%26%20Management%2C%20Kolaghat!5e0!3m2!1sen!2sin!4v1702967233669!5m2!1sen!2sin" width="80%" height="300px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe  src="<?php echo $contact_r['iframe']?>" width="80%" height="300px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <h2><i class="fa-solid fa-envelope"></i>Email</h2>
-        <p>easyparking@gmail.com</p>
+        <p><?php echo $contact_r['email']?></p>
         <h2><i class="fa-solid fa-phone"></i>Phone</h2>
-        <p>91-33-1234 5678</p>
+        <p><?php echo $contact_r['pn1']?></p>
         <div class="social-icons">
-          <a href="https://www.linkedin.com/in/satyapriya-achar-520342196/"><i class="fa-brands fa-linkedin" style="color: blue;"></i></a>
-          <a href="https://twitter.com/SatyapriyaAchar"><i class="fa-brands fa-twitter"></i></a>
-          <a href="https://youtube.com/@living_ideal?si=HE2vIMn0sFGfagvY"><i class="fa-brands fa-youtube" style="color: #e54b24;"></i></a>
-          <a href=""><i class="fa-brands fa-whatsapp" style="color: #16ac34;"></i></a>
+          <a href="<?php echo $contact_r['linkd']?>"><i class="fa-brands fa-linkedin" style="color: blue;"></i></a>
+          <a href="<?php echo $contact_r['tw']?>"><i class="fa-brands fa-twitter"></i></a>
+          <a href="<?php echo $contact_r['yt']?>"><i class="fa-brands fa-youtube" style="color: #e54b24;"></i></a>
+          <a href="<?php echo $contact_r['wp']?>"><i class="fa-brands fa-whatsapp" style="color: #16ac34;"></i></a>
         </div>
       </div>
     </div>

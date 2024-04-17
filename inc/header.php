@@ -1,3 +1,7 @@
+<?php
+  require('admin/inc/db_config.php');
+  require('admin/inc/essential.php');
+?>
 <nav class="navi">
         <a href="#"><img src="images/logo.png" class="logo"></a>
         <ul id="sidemenu">
