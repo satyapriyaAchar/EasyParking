@@ -306,20 +306,43 @@
     <div class="row2">
       <div class="contact-left">
         <h1 class="sub-title mt-5">Contact Us</h1>
-        <h2>Address</h2>
-        <p ><?php echo $contact_r['address']?></p>
-        <div class="gmap">
-        <iframe  src="<?php echo $contact_r['iframe']?>" width="80%" height="300px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <h2><i class="fa-solid fa-envelope"></i>Email</h2>
-        <p><?php echo $contact_r['email']?></p>
-        <h2><i class="fa-solid fa-phone"></i>Phone</h2>
-        <p><?php echo $contact_r['pn1']?></p>
-        <div class="social-icons">
-          <a href="<?php echo $contact_r['linkd']?>"><i class="fa-brands fa-linkedin" style="color: blue;"></i></a>
-          <a href="<?php echo $contact_r['tw']?>"><i class="fa-brands fa-twitter"></i></a>
-          <a href="<?php echo $contact_r['yt']?>"><i class="fa-brands fa-youtube" style="color: #e54b24;"></i></a>
-          <a href="<?php echo $contact_r['wp']?>"><i class="fa-brands fa-whatsapp" style="color: #16ac34;"></i></a>
+        <div class="row">
+          <div class="col-6">
+          <h2>Address</h2>
+          <p ><?php echo $contact_r['address']?></p>
+          <div class="gmap">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.0448925267874!2d87.85924817424544!3d22.42733607959538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02980f71daa971%3A0xd8a291eb93011bcf!2sCollege%20Of%20Engineering%20%26%20Management%2C%20Kolaghat!5e0!3m2!1sen!2sin!4v1713462232878!5m2!1sen!2sin" width="80%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>          </div>
+          <h2><i class="fa-solid fa-envelope"></i>Email</h2>
+          <p><?php echo $contact_r['email']?></p>
+          <h2><i class="fa-solid fa-phone"></i>Phone</h2>
+          <p><?php echo $contact_r['pn1']?></p>
+          <div class="social-icons">
+            <a href="<?php echo $contact_r['linkd']?>"><i class="fa-brands fa-linkedin" style="color: blue;"></i></a>
+            <a href="<?php echo $contact_r['tw']?>"><i class="fa-brands fa-twitter"></i></a>
+            <a href="<?php echo $contact_r['yt']?>"><i class="fa-brands fa-youtube" style="color: #e54b24;"></i></a>
+            <a href="<?php echo $contact_r['wp']?>"><i class="fa-brands fa-whatsapp" style="color: #16ac34;"></i></a>
+          </div>
+          </div>
+          <div class="col-6">
+          <h2>Connect us</h2>
+            <form>
+              <label class="form-label" for="form4Example1">Name</label> 
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="form4Example1" class="form-control shadow-none" required />
+              </div>
+              <!-- Email input -->
+              <label class="form-label" for="form4Example2">Email address</label>
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="email" id="form4Example2" class="form-control shadow-none" required  />
+              </div>
+              <!-- Message input -->
+              <label class="form-label" for="form4Example3">Message</label>
+              <div data-mdb-input-init class="form-outline mb-4">
+                <textarea class="form-control shadow-none" id="form4Example3" rows="4"></textarea>               
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
