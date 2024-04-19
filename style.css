@@ -249,6 +249,12 @@ nav ul li a:hover::after{
 nav .fa-solid{
     display: none;
 }
+
+.custom-alert{
+    position:fixed;
+    top: 80px;
+    right: 25px;
+}
 /* ---------------------css for small screens---------------- */
 
 @media only screen and (max-width: 600px){

@@ -325,31 +325,53 @@
           </div>
           <div class="col-6">
           <h2>Connect us</h2>
-            <form>
+            <form method="POST">
               <label class="form-label" for="form4Example1">Name</label> 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="form4Example1" class="form-control shadow-none" required />
+                <input name="name" type="text" id="form4Example1" class="form-control shadow-none" required />
               </div>
               <!-- Email input -->
               <label class="form-label" for="form4Example2">Email address</label>
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="email" id="form4Example2" class="form-control shadow-none" required  />
+                <input name="email" type="email" id="form4Example2" class="form-control shadow-none" required  />
+              </div>
+              <label class="form-label" for="form4Example3">Subject</label> 
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input name="subject" type="text" id="form4Example3" class="form-control shadow-none" required />
               </div>
               <!-- Message input -->
-              <label class="form-label" for="form4Example3">Message</label>
+              <label class="form-label" for="form4Example4">Message</label>
               <div data-mdb-input-init class="form-outline mb-4">
-                <textarea class="form-control shadow-none" id="form4Example3" rows="4"></textarea>               
+                <textarea name="message" class="form-control shadow-none" id="form4Example4" rows="4"></textarea>               
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button name="send" type="submit" class="btn btn-primary">SEND</button>
             </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <?php require('inc/footer.php');?>
 </div>
+<!-- Error occur (sir) -->
+<?php 
+  //  if(isset($_POST['send']))
+  //  {
+  //   $frm_data = filteration($_POST);
 
+  //   $q = "INSERT INTO `user_queries`(`name`, `email`,`subject`,`message`) VALUES (?,?,?,?)";
+  //   $values = [$frm_data['name'],$frm_data['email'],$frm_data['subject'],$frm_data['message']];
+
+  //   $res = insert($q,$values,'ssss');
+  //   if($res == 1)
+  //   {
+  //     alert('success','Mail sent!');
+  //   }
+  //   else{
+  //     alert('error','server Down! Try again later');
+  //   }
+  //  }
+?> 
+<?php require('inc/footer.php');?>
 <!--------------------- responsive nav bar --------------->
 <script>
      var sidemenu =document.getElementById("sidemenu");
