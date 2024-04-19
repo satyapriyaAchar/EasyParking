@@ -18,7 +18,7 @@
                 <a class="nav-link text-white" href="parking.php">Parking</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link text-white" href="users.php">User</a>
+                <a class="nav-link text-white" href="user_queries.php">User Queries</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link text-white" href="settings.php">Settings</a>
