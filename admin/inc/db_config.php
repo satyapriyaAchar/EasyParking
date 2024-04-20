@@ -22,6 +22,12 @@ function filteration($data){           // common filteration
     return $data;  // return to index.php filteration call
 }
 
+function selectAll($table)
+{
+    $con = $GLOBALS['con'];
+    $res = mysqli_query($con,"SELECT * FROM $table");
+    return $res;
+}
 function select($sql,$values,$datatypes) //prepare
 {
     $con = $GLOBALS['con'];
@@ -84,5 +90,27 @@ function insert($sql,$values,$datatypes) //prepare
         die("Query cannot be prepared - insert");
     }
 }
+
+function delete($sql,$values,$datatypes) //prepare
+{
+    $con = $GLOBALS['con'];
+    if($stmt = mysqli_prepare($con,$sql)){
+       mysqli_stmt_bind_param($stmt,$datatypes,...$values);
+       if(mysqli_stmt_execute($stmt)){
+         $res = mysqli_stmt_affected_rows($stmt);
+         mysqli_stmt_close($stmt);
+         return $res;
+       }
+       else{
+        mysqli_stmt_close($stmt);
+        die("Query cannot be executed - delete");
+       }
+       
+    }
+    else{
+        die("Query cannot be prepared - delete");
+    }
+}
+
 
 ?>
