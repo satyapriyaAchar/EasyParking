@@ -60,18 +60,27 @@
         $frm_data = filteration($_POST);
         $values = [$frm_data['rem_services']];
 
-        $pre_q = "SELECT * FROM `services` WHERE `id`=?";
-        $res = select($pre_q,$values,'i');
-        $img = mysqli_fetch_assoc($res);
+        $check_q = select('SELECT * FROM `parking_services` WHERE `services_id`=?',[$frm_data['rem_services']],'i');
 
-        if(deleteImage($img['icon'],SERVICES_FOLDER)){
-         $q = "DELETE FROM `services` WHERE `id`=?";
-        $res = delete($q,$values,'i');
-        echo $res;   
+        if(mysqli_num_rows($check_q)==0)
+        {
+            $pre_q = "SELECT * FROM `services` WHERE `id`=?";
+            $res = select($pre_q,$values,'i');
+            $img = mysqli_fetch_assoc($res);
+
+            if(deleteImage($img['icon'],SERVICES_FOLDER)){
+            $q = "DELETE FROM `services` WHERE `id`=?";
+            $res = delete($q,$values,'i');
+            echo $res;   
+            }
+            else{
+                echo 0;
+            }
         }
         else{
-            echo 0;
+            echo 'parking_added';
         }
+        
     }
     
     
