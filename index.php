@@ -191,24 +191,22 @@
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5">Our Services</h1>
     <div class="services-list">
-      <div>
-        <i class="fa-solid fa-square-parking" style="color: #d24314;"></i>
-        <h2>Parking</h2>
-        <p>At EasyParking, we offer a comprehensive vehicle parking service that prioritizes convenience, security, and ease of use. Our network of parking locations ensures that you can find a spot near your destination, whether you're heading to a busy city center, an event venue, or an airport</p>
-        <a href="#">Learn more</a>
-      </div>
-      <div>
-        <i class="fa-solid fa-charging-station" style="color: #d24314;"></i>
-        <h2>EV Charging</h2>
-        <p>EasyParking is committed to supporting sustainable transportation options. That's why we provide access to Electric Vehicle (EV) charging stations at select parking locations. With our EV charging services, you can conveniently charge your electric vehicle while it's parked, ensuring you have a fully charged battery when you're ready to hit the road</p>
-        <a href="#">Learn more</a>
-      </div>
-      <div>
-        <i class="fa-solid fa-car-side" style="color: #d24314;"></i>
-        <h2>Car Washing</h2>
-        <p>At EasyParking, we understand the importance of maintaining a clean and presentable vehicle. That's why we offer on-site vehicle washing and detailing services at select parking locations. Whether you're looking for a quick wash or a thorough detailing, our professional car care partners are ready to meet your needs</p>
-        <a href="#">Learn more</a>
-      </div>
+      <?php
+         $res = selectAll('services');
+         $path = SERVICES_IMG_PATH;
+
+         while($row = mysqli_fetch_assoc($res))
+         {
+          echo <<<data
+          <div class="dynamic_services">
+            <img src="$path$row[icon]" width="40px" style="margin-bottom: 30px">
+            <h2>$row[name]</h2>
+            <p>$row[description]</p>
+            <a href="#">Learn more</a>
+          </div>
+          data;
+         }
+      ?>
     </div>
   </div>
 </div>
