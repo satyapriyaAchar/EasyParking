@@ -51,7 +51,7 @@
 
     if(isset($_POST['get_all_parking']))
     {
-        $res = selectAll('parking');
+        $res = select("SELECT * FROM `parking` WHERE `removed`=?",[0],'i');
         $i=1;
 
         $data = "";
@@ -79,6 +79,9 @@
                         </button>
                         <button type='button' onclick=\"parking_images($row[id],'$row[name]')\" class='btn btn-info shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#parking-images'>
                             <i class='bi bi-images'></i> Img
+                        </button>
+                        <button type='button' onclick='remove_parking($row[id])' class='btn btn-danger shadow-none btn-sm'>
+                            <i class='bi bi-trash'></i> Delete
                         </button>
                     </td>
                 </tr>
@@ -216,12 +219,22 @@
         
         while($row = mysqli_fetch_assoc($res))
         {
+            if($row['thumb'] == 1)
+            { 
+                $thumb_btn = "<i class='bi bi-check-lg text-light bg-success px-2 py-1 rounded fs-5'></i>";
+            }
+            else{
+                $thumb_btn = "<button onclick='thumb_image($row[sr_no],$row[parking_id])' class='btn btn-secondary shadow-none'>
+                    <i class='bi bi-check-lg'></i>
+                </button>";
+            }
+
             echo <<<data
             <tr class='align-middle'>
                 <td><img src='$path$row[image]' class='img-fluid'></td>
-                <td>thumb</td>
+                <td>$thumb_btn</td>
                 <td>
-                    <button onclick='rem_image($row[sr_no],$row[parking_id])' class='btn btn-danger btn-sm shadow-none'>
+                    <button onclick='rem_image($row[sr_no],$row[parking_id])' class='btn btn-danger  shadow-none'>
                       <i class='bi bi-trash'></i>
                     </button>
 
@@ -254,5 +267,47 @@
         
         
     }
+
+    if(isset($_POST['thumb_image']))
+    {
+        $frm_data = filteration($_POST);
+        $values = [$frm_data['image_id'],$frm_data['parking_id']];
+
+        $pre_q = "UPDATE `parking_image` SET `thumb`=? WHERE `parking_id`=?";
+        $pre_v = [0,$frm_data['parking_id']];
+        $pre_res = update($pre_q,$pre_v,'ii');
+
+        $q = "UPDATE `parking_image` SET `thumb`=? WHERE `sr_no`=? AND `parking_id`=?";
+        $v = [1,$frm_data['image_id'],$frm_data['parking_id']];
+        $res = update($q,$v,'iii');
+
+        echo $res;
+    }
+
+    if(isset($_POST['remove_parking']))
+    {
+        $frm_data = filteration($_POST);
+        
+        $res1 = select("SELECT * FROM `parking_image` WHERE `parking_id`=?",[$frm_data['parking_id']],'i');
+
+        while($row = mysqli_fetch_assoc($res1))
+        {
+            deleteImage($row['image'],PARKING_FOLDER);
+        }
+
+        $res2 = delete("DELETE FROM `parking_image` WHERE `parking_id`=?",[$frm_data['parking_id']],'i');
+        $res3 = delete("DELETE FROM `parking_services` WHERE `parking_id`=?",[$frm_data['parking_id']],'i');
+        $res4 = update("UPDATE `parking` SET `removed`=? WHERE `id`=?",[1,$frm_data['parking_id']],'ii');
+        
+
+        if($res2 || $res3 || $res4)
+        {
+            echo 1;
+        }
+        else{
+            echo 0;
+        }
+    }
+
 
 ?>

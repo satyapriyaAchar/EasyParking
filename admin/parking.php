@@ -469,6 +469,69 @@
 
       }
 
+      function thumb_image(img_id,parking_id)
+      {
+
+        let data = new FormData();
+        // console.log(services_s_form.elements['services_name'].value);
+        data.append('image_id',img_id);
+        data.append('parking_id',parking_id);
+
+        data.append('thumb_image','');
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/parking.php",true);
+
+        xhr.onload = function()
+        {
+          
+          if(this.responseText == 1)
+          {
+            alert('success','Thumbnail Changed','image-alert');
+            parking_images(parking_id,document.querySelector("#parking-images .modal-title").innerText);
+          }
+          else
+          {
+            // console.log(this.responseText);
+            alert('error','Thumbnail failed','image-alert');
+            add_image_form.reset();
+            
+          }
+
+        }
+        xhr.send(data);
+
+      }
+
+
+      function remove_parking(parking_id)
+      {
+
+        if(confirm("Are you sure, want to delete this parking"))
+        {
+          let data = new FormData();
+          data.append('parking_id',parking_id);
+          data.append('remove_parking','');
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST","ajax/parking.php",true);
+
+          xhr.onload = function()
+          {
+            
+            if(this.responseText == 1)
+            {
+              alert('success','Parking removed');
+              get_all_parking();           
+            }
+            else
+            {
+              alert('error','Parking removed failed!');
+            }
+          }
+          xhr.send(data);
+        }
+      }
+
       window.onload = function(){
         get_all_parking();
       }
