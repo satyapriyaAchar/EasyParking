@@ -220,12 +220,39 @@
             <tr class='align-middle'>
                 <td><img src='$path$row[image]' class='img-fluid'></td>
                 <td>thumb</td>
-                <td>delete</td>
+                <td>
+                    <button onclick='rem_image($row[sr_no],$row[parking_id])' class='btn btn-danger btn-sm shadow-none'>
+                      <i class='bi bi-trash'></i>
+                    </button>
+
+                </td>
             </tr>
             data;
         }
         
 
+    }
+
+    if(isset($_POST['rem_image']))
+    {
+        $frm_data = filteration($_POST);
+        $values = [$frm_data['image_id'],$frm_data['parking_id']];
+
+        $pre_q = "SELECT * FROM `parking_image` WHERE `sr_no`=? AND `parking_id`=?";
+        $res = select($pre_q,$values,'ii');
+        $img = mysqli_fetch_assoc($res);
+
+        if(deleteImage($img['image'],PARKING_FOLDER)){
+            $q = "DELETE FROM `parking_image` WHERE `sr_no`=? AND `parking_id`=?";
+            $res = delete($q,$values,'ii');
+            echo $res;   
+        }
+        else{
+            echo 0;
+        }
+        
+        
+        
     }
 
 ?>

@@ -395,21 +395,23 @@
           console.log(this.responseText);
           if(this.responseText == 'inv_img')
           {
-            alert('error','Only PNG,JPG,webp images are allowed!');
+            alert('error','Only PNG,JPG,webp images are allowed!','image-alert');
           }
           else if(this.responseText == 'inv_size'){
-            alert('error','size should be <1MB allowed!');
+            alert('error','size should be <1MB allowed!','image-alert');
           }
           else if(this.responseText == 'upd_failed')
           {
             
-            alert('error','Image upload failed. server down!');
+            alert('error','Image upload failed. server down!','image-alert');
           }
           else
           {
             // console.log(this.responseText);
             alert('success','New image added','image-alert');
+            parking_images(add_image_form.elements['parking_id'].value,document.querySelector("#parking-images .modal-title").innerText);
             add_image_form.reset();
+            
           }
 
         }
@@ -430,6 +432,40 @@
               document.getElementById('parking-image-data').innerHTML = this.responseText;
           }
           xhr.send('get_parking_images='+id);
+
+      }
+
+      function rem_image(img_id,parking_id)
+      {
+
+        let data = new FormData();
+        // console.log(services_s_form.elements['services_name'].value);
+        data.append('image_id',img_id);
+        data.append('parking_id',parking_id);
+
+        data.append('rem_image','');
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/parking.php",true);
+
+        xhr.onload = function()
+        {
+          
+          if(this.responseText == 1)
+          {
+            alert('success','Image removed Successful','image-alert');
+            parking_images(parking_id,document.querySelector("#parking-images .modal-title").innerText);
+          }
+          else
+          {
+            // console.log(this.responseText);
+            alert('error','Image removal failed','image-alert');
+            add_image_form.reset();
+            
+          }
+
+        }
+        xhr.send(data);
 
       }
 
