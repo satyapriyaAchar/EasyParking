@@ -59,10 +59,10 @@
         while($row = mysqli_fetch_assoc($res))
         {
             if($row['status']==1){
-                $status = "<button onclick='toggle_status($row[id],0)' class='btn btn-dark btn-sm shadow-none'>active</button>";
+                $status = "<button onclick='toggle_status($row[id],0)' class='btn btn-dark btn-sm shadow-none'>Active</button>";
             }
             else{
-                $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-warning btn-sm shadow-none'>inactive</button>";
+                $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-warning btn-sm shadow-none'>Inactive</button>";
             }
 
 
@@ -75,7 +75,10 @@
                     <td>$status</td>
                     <td>
                         <button type='button' onclick='edit_details($row[id])' class='btn btn-primary shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#edit-parking'>
-                            <i class='bi bi-pencil-square'></i> EDIT
+                            <i class='bi bi-pencil-square'></i> Edit
+                        </button>
+                        <button type='button' onclick=\"parking_images($row[id],'$row[name]')\" class='btn btn-info shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#parking-images'>
+                            <i class='bi bi-images'></i> Img
                         </button>
                     </td>
                 </tr>
@@ -174,6 +177,55 @@
         else{
             echo 0;
         }
+    }
+
+
+    if(isset($_POST['add_image']))
+    {
+        $frm_data = filteration($_POST);
+
+        $img_r = uploadImage($_FILES['image'],PARKING_FOLDER);
+        if($img_r == 'inv_img'){
+            echo $img_r;
+        }
+        else if($img_r == 'inv_size'){
+            echo $img_r;
+        }
+        else if($img_r == 'upd_failed'){
+            echo $img_r;
+        }
+        else{ 
+            
+            $q = "INSERT INTO `parking_image`(`parking_id`,`image`) VALUES (?,?)";
+            $values = [$frm_data['parking_id'],$img_r];
+            $res = insert($q,$values,'is');
+            echo $res;
+            
+        }
+        
+
+    }
+
+
+    if(isset($_POST['get_parking_images']))
+    {
+        $frm_data = filteration($_POST);
+        $res = select("SELECT * FROM `parking_image` WHERE `parking_id`=?",[$frm_data['get_parking_images']],'i');
+        
+        $path = PARKING_IMG_PATH;
+        
+        while($row = mysqli_fetch_assoc($res))
+        {
+            echo <<<data
+            <tr class='align-middle'>
+                <td><img src='$path$row[image]' class='img-fluid'></td>
+                <td>thumb</td>
+                <td>delete</td>
+            </tr>
+            data;
+        }
+        
+
     }
 
 ?>

@@ -5,6 +5,7 @@
 define('SITE_URL','http://127.0.0.1/EasyParking/');
 // define('ABOUT_IMG_PATH',SITE_URL.'images');
 define('SERVICES_IMG_PATH',SITE_URL.'images/services/');
+define('PARKING_IMG_PATH',SITE_URL.'images/parking/');
 
 
 // backend upload process needs this data
@@ -12,6 +13,7 @@ define('SERVICES_IMG_PATH',SITE_URL.'images/services/');
 define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/EasyParking/images/');
 // define('ABOUT_FOLDER','about/');
 define('SERVICES_FOLDER','services/');
+define('PARKING_FOLDER','parking/');
 
 
 function adminLogin()
@@ -43,6 +45,37 @@ function adminLogin()
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     alert;
+  }
+
+  function uploadImage($image,$folder)
+  {
+    $valid_mime = ['image/jpeg','image/png','image/jpg','image/webp'];
+    $img_mime = $image['type'];
+    $img_s = $image['size'];
+
+    if(!in_array($img_mime,$valid_mime)){
+      return 'inv_img'; //invalid image mime or format
+    }
+    else if(($img_s/(1024*1024))>3){
+      return 'inv_size'; //invalid size greater than 1mb
+    }
+    else{
+      $ext = pathinfo($image['name'],PATHINFO_EXTENSION);
+      $rname = 'IMG_'.random_int(11111,99999).".$ext";
+    
+
+      $img_path = UPLOAD_IMAGE_PATH.$folder.$rname;
+      if(move_uploaded_file($image['tmp_name'],$img_path))
+      {
+        return $rname;
+      }
+      else{
+        // return $rname;
+        // return $image['tmp_name'];
+        
+        return 'upd_failed';
+      }
+    }
   }
 
   function uploadSVGImage($image,$folder)

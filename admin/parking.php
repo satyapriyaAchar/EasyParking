@@ -163,6 +163,45 @@
       </div>
     </div>
 
+<!------------- Manage parking images Modal popup ----------------->
+
+    <div class="modal fade" id="parking-images" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Parking Name</h5>
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="image-alert">
+
+            </div>
+            <div class="border-bottom border-3 pb-3 mb-3">
+              <form id="add_image_form">
+                <label class="form-label fw-bold">Add Image</label>
+                <input type="file" name="image" accept=".jpg, .png, .webp, .jpeg" class="form-control shadow-none mb-3 " required >
+                <button type="submit" class="btn btn-primary shadow-none">ADD</button>
+                <input type="hidden" name="parking_id">
+              </form>
+            </div>
+            <div class="table-responsive-lg" style="height: 350px; overflow-y: scroll">
+              <table class="table table-hover border text-center">
+                <thead >
+                  <tr class="bg-dark text-light sticky-top">
+                    <th scope="col" width="60%">Image</th>
+                    <th scope="col">Thumb</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody id="parking-image-data">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <?php require('inc/scripts.php'); ?>
 
     <script>
@@ -328,6 +367,70 @@
               }
           }
           xhr.send('toggle_status='+id+'&value='+val);
+      }
+
+
+      let add_image_form = document.getElementById('add_image_form');
+
+      add_image_form.addEventListener('submit',function(e)
+      {
+        e.preventDefault();
+        add_image();
+      });
+
+      function add_image()
+      {
+        let data = new FormData();
+        // console.log(services_s_form.elements['services_name'].value);
+        data.append('image',add_image_form.elements['image'].files[0]);
+        data.append('parking_id',add_image_form.elements['parking_id'].value);
+
+        data.append('add_image','');
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/parking.php",true);
+
+        xhr.onload = function()
+        {
+          console.log(this.responseText);
+          if(this.responseText == 'inv_img')
+          {
+            alert('error','Only PNG,JPG,webp images are allowed!');
+          }
+          else if(this.responseText == 'inv_size'){
+            alert('error','size should be <1MB allowed!');
+          }
+          else if(this.responseText == 'upd_failed')
+          {
+            
+            alert('error','Image upload failed. server down!');
+          }
+          else
+          {
+            // console.log(this.responseText);
+            alert('success','New image added','image-alert');
+            add_image_form.reset();
+          }
+
+        }
+        xhr.send(data);
+      }
+
+      function parking_images(id,pname)
+      {
+        document.querySelector("#parking-images .modal-title").innerText = pname;
+        add_image_form.elements['parking_id'].value = id;
+        add_image_form.elements['image'].value = '';
+
+        let xhr = new XMLHttpRequest();
+          xhr.open("POST","ajax/parking.php",true);
+          xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded') ;
+
+          xhr.onload = function(){
+              document.getElementById('parking-image-data').innerHTML = this.responseText;
+          }
+          xhr.send('get_parking_images='+id);
+
       }
 
       window.onload = function(){
