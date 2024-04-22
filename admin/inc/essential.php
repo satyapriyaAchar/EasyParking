@@ -56,7 +56,7 @@ function adminLogin()
     if(!in_array($img_mime,$valid_mime)){
       return 'inv_img'; //invalid image mime or format
     }
-    else if(($img_s/(1024*1024))>3){
+    else if(($img_s/(1024*1024))>10){
       return 'inv_size'; //invalid size greater than 1mb
     }
     else{

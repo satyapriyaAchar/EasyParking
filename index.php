@@ -66,104 +66,77 @@
 <!-- ---------- Parking -------------- -->
 
 <div id="Parking" class="pt-5">
- <div class="container shadow p-3 mb-5 bg-body rounded">
- <h1 class="sub-title mt-5 ">Parking</h1>
-   <div class="row">
-    <div class="col-lg-4 col-md-6 my-3">
-     <div class="card border-0 shadow" style="max-width:350px;margin: auto;">
-       <img src="images/1.webp" class="card-img-top">
-        <div class="card-body">
-         <h5>Two Wheeler</h5>
-         <h6 class="mb-4">₹5 per Hour</h6>
-         <div class="features mb-4">
-           <h6 class="mb-1">Facilities</h6>
-           <span class="badge rounded-pill bg-light text-dark text-wrap">
-            Cleaning
-           </span>
-           <span class="badge rounded-pill  bg-light text-dark text-wrap">
-            security
-           </span>
-         </div>
-            <div class="rating mb-4">
-             <h6 class="mb-1">Rating</h6>
-             <span class="badge rounded-pill bg-light">
-             <i class="fa-solid fa-star text-warning"></i>
-             <i class="fa-solid fa-star text-warning"></i>
-             <i class="fa-solid fa-star text-warning"></i>
-             <i class="fa-solid fa-star text-warning"></i>
-             </span>  
-            </div>
-         <div class="d-flex justify-content-evenly mb-2">
-         <a href="#" class="btn btn-primary shadow-none">Book Now</a>
-         <a href="#" class="btn btn-sm btn-outline-dark pt-2 shadow-none">More details</a>
-        </div>
-        </div>
-     </div>
-    </div>
-    <div class="col-lg-4 col-md-6 my-3">
-     <div class="card border-0 shadow" style="max-width:350px;margin: auto;">
-       <img src="images/3.webp" class="card-img-top" alt="...">
-        <div class="card-body">
-         <h5>Three Wheeler</h5>
-         <h6 class="mb-4">₹10 per Hour</h6>
-         <div class="features mb-4">
-           <h6 class="mb-1">Facilities</h6>
-           <span class="badge rounded-pill bg-light text-dark text-wrap">
-            Cleaning
-           </span>
-           <span class="badge rounded-pill bg-light text-dark text-wrap">
-            security
-           </span>
-         </div>
-         <div class="rating mb-4">
-           <h6 class="mb-1">Rating</h6>
-           <span class="badge rounded-pill bg-light">
-             <i class="fa-solid fa-star text-warning"></i>
-             <i class="fa-solid fa-star text-warning"></i>
-             <i class="fa-solid fa-star text-warning"></i>
-             <i class="fa-solid fa-star text-warning"></i>
-             </span>  
-         </div>
-         <div class="d-flex justify-content-evenly mb-2">
-         <a href="#" class="btn btn-primary shadow-none">Book Now</a>
-         <a href="#" class="btn btn-sm btn-outline-dark pt-2 shadow-none">More details</a>
-        </div>
-        </div>
-     </div>
-    </div>
-    <div class="col-lg-4 col-md-6 my-3">
-     <div class="card border-0 shadow" style="max-width:350px;margin: auto;">
-       <img src="images/2.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-         <h5>Four Wheeler</h5>
-         <h6 class="mb-4">₹30 per Hour</h6>
-         <div class="features mb-4">
-           <h6 class="mb-1">Facilities</h6>
-           <span class="badge rounded-pill bg-light text-dark text-wrap">
-            Car Wash
-           </span>
-           <span class="badge rounded-pill bg-light text-dark text-wrap">
-            Charging
-           </span>
-         </div>
-         <div class="rating mb-4">
-           <h6 class="mb-1">Rating</h6>
-           <span class="badge rounded-pill bg-light">
-             <i class="fa-solid fa-star text-warning"></i>
-             <i class="fa-solid fa-star text-warning"></i>
-             <i class="fa-solid fa-star text-warning"></i>
-             <i class="fa-solid fa-star text-warning"></i>
-             </span>  
-         </div>
-         <div class="d-flex justify-content-evenly mb-2">
-         <a href="#" class="btn btn-primary shadow-none">Book Now</a>
-         <a href="#" class="btn btn-sm btn-outline-dark pt-2 shadow-none">More details</a>
-        </div>
-        </div>
-     </div>
-    </div>
+  <div class="container shadow p-3 mb-5 bg-body rounded">
+    <h1 class="sub-title mt-5 ">Parking</h1>
+    <div class="row">
+      <?php
+        $parking_res = select("SELECT * FROM `parking` WHERE `status`=? AND `removed`=?  LIMIT 3",[1,0],'ii');
+        
+        while($parking_data = mysqli_fetch_assoc($parking_res))
+        {
+            //get services of parking
+
+            $fea_q = mysqli_query($con,"SELECT p.name FROM `services` p 
+                INNER JOIN `parking_services` pser ON p.id = pser.services_id
+                WHERE pser.parking_id = '$parking_data[id]'");
+
+            $services_data = "";
+            while($fea_row = mysqli_fetch_assoc($fea_q))
+            {
+                $services_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
+                    $fea_row[name]
+                </span>";
+                
+            }
+
+            //get thumbnail of parking
+
+            $parking_thumb = PARKING_IMG_PATH."thumbnail.png";
+            $thumb_q = mysqli_query($con,"SELECT * FROM `parking_image` 
+                WHERE `parking_id`='$parking_data[id]' AND `thumb`='1'");
+
+            if(mysqli_num_rows($thumb_q)>0)
+            {
+                $thumb_res = mysqli_fetch_assoc($thumb_q);
+                $parking_thumb = PARKING_IMG_PATH.$thumb_res['image'];
+            }
+            //dynamic display parking card
+            echo <<<data
+
+              <div class="col-lg-4 col-md-6 my-3">
+                <div class="card border-0 shadow" style="max-width:350px;margin: auto;">
+                  <img src="$parking_thumb" class="card-img-top">
+                    <div class="card-body">
+                    <h5>$parking_data[name]</h5>
+                    <h6 class="mb-4">₹$parking_data[price] per Hour</h6>
+                    <div class="features mb-4">
+                      <h6 class="mb-1">Services</h6>
+                      $services_data
+                    </div>
+                        <div class="rating mb-4">
+                        <h6 class="mb-1">Rating</h6>
+                        <span class="badge rounded-pill bg-light">
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        </span>  
+                        </div>
+                    <div class="d-flex justify-content-evenly mb-2">
+                    <a href="#" class="btn btn-primary shadow-none">Book Now</a>
+                    <a href="parking_details.php?id=$parking_data[id]" class="btn btn-sm btn-outline-dark pt-2 shadow-none">More details</a>
+                    </div>
+                    </div>
+                </div>
+              </div>
+        
+            data;
+        }
+
+      ?>
+ 
     <div class="col-lg-12 text-center mt-5">
-        <a href="#" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More</a>
+        <a href="parking.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More</a>
     </div>
     
    </div>
