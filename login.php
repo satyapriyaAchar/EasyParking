@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- <meta charset='utf-8'>
+    <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css">
-    
-
+    <link rel="stylesheet" href="login.css">    
     <script src="https://kit.fontawesome.com/2285a15cc8.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -21,6 +19,11 @@
         <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         
     </nav>
+
+
+
+
+
      <div class="hero">
         <div class="form-box">
             <div class="button-box">
@@ -51,6 +54,7 @@
         </div>
        
      </div>
+     
      <script>
         var x=document.getElementById("login");
         var y=document.getElementById("register");

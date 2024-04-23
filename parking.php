@@ -5,19 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyParking-Parking</title>
     <?php require('inc/links.php');?>
-    <?php 
-        require('admin/inc/db_config.php');
-        require('admin/inc/essential.php');
-    ?>
-    
-    
-    
-    
+   
+       
 </head>
 <body class="bg-light">
 
 <!---------------- nav-bar ---------------->
-<nav class="navi">
+<!-- <nav class="navi">
         <a href="index.php"><img src="images/logo.png" class="logo"></a>
         <ul id="sidemenu">
             <i class="fa-solid fa-house" style="color: azure;"></i>
@@ -26,7 +20,12 @@
         </ul>
         <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         
-</nav>
+</nav> -->
+<?php require('inc/header.php');?>
+
+
+
+
 
 <!----------------- title ---------------->
 <div class="my-5 px-4">
@@ -148,5 +147,7 @@
 
 <!--------------- footer ----------------->
 <?php require('inc/footer.php');?> 
+
+<script src="inc/common.js"></script>
 </body>
 </html>

@@ -3,52 +3,10 @@
     padding: 0;
     font-family: serif;
 }
-.navi{
-    background: #000000;
-    padding: 5px 10%;
-    display: flex; /* side-by-side */
-    align-items:center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-}
 .logo{
     width: 80px;
     height: 40px;
     border-radius: 5px;
-}
-nav ul li{
-    display: inline-block; /*horizontal allign*/
-    list-style: none;
-    margin: 10px 20px;
-    
-}
-nav ul li a{
-    color: rgb(255, 234, 229);
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    transition: 0.5;
-    position: relative;
-}
-nav ul li a:hover{
-    color: yellow;
-}
-nav ul li a::after{
-    content: '';
-    width: 0;
-    height: 3px;
-    background: red;
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    transition: 0.5s;
-    
-}
-nav ul li a:hover::after{
-    width: 100%;
-    
 }
 .hero{
     height: 700;

@@ -63,8 +63,7 @@
   </div>
     
   <br><br><br>
-<!-- ---------- Parking -------------- -->
-
+<!-- --------- Parking -------------- -->
 <div id="Parking" class="pt-5">
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5 ">Parking</h1>
@@ -85,8 +84,7 @@
             {
                 $services_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
                     $fea_row[name]
-                </span>";
-                
+                </span>";   
             }
 
             //get thumbnail of parking
@@ -100,9 +98,9 @@
                 $thumb_res = mysqli_fetch_assoc($thumb_q);
                 $parking_thumb = PARKING_IMG_PATH.$thumb_res['image'];
             }
+
             //dynamic display parking card
             echo <<<data
-
               <div class="col-lg-4 col-md-6 my-3">
                 <div class="card border-0 shadow" style="max-width:350px;margin: auto;">
                   <img src="$parking_thumb" class="card-img-top">
@@ -128,22 +126,20 @@
                     </div>
                     </div>
                 </div>
-              </div>
-        
+              </div>        
             data;
         }
 
       ?>
  
-    <div class="col-lg-12 text-center mt-5">
+      <div class="col-lg-12 text-center mt-5">
         <a href="parking.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More</a>
+      </div>    
     </div>
-    
-   </div>
- </div>
+  </div>
 </div>
 
-<!-- ---------------about section----------------- -->
+<!-----------about section------------ -->
 <?php
   $about_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
   $values = [1];
@@ -159,7 +155,7 @@
   </div>
 </div>
 
-<!-- ----------------------------services section----------------------- -->
+<!--------services section--------------->
 <div id="services" class="pt-5">
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5">Our Services</h1>
@@ -184,7 +180,7 @@
   </div>
 </div>
 
-<!-- ---------------faq section------------------------- -->
+<!-----------faq section------------------>
 <div id="question" class="pt-5">
   <div class="container shadow p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5 ">Frequently Asked Questions</h1>
@@ -265,8 +261,7 @@
   </div>
 </div>
 
-<!-- -------------------contact section------------------- -->
-
+<!----------contact section---------------->
 <?php
   $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
   $values = [1];
@@ -323,7 +318,6 @@
     </div>
   </div>
 </div>
-<!-- Error occur (sir) -->
 <?php 
    if(isset($_POST['send']))
    {
@@ -342,19 +336,10 @@
     }
    }
 ?> 
+<!----------- footer section ---------------->
 <?php require('inc/footer.php');?>
-<!--------------------- responsive nav bar --------------->
-<script>
-     var sidemenu =document.getElementById("sidemenu");
-     function openmenu()
-     {
-        sidemenu.style.right="0";
-     }
-     function closemenu()
-     {
-        sidemenu.style.right="-200px";
-     }
-</script>
+<!------------- responsive nav bar ----------->
+<script src="inc/common.js"></script>
 
 </body>
 </html>
