@@ -20,10 +20,6 @@
         
     </nav>
 
-
-
-
-
      <div class="hero">
         <div class="form-box">
             <div class="button-box">
@@ -31,7 +27,7 @@
                 <button type="button" class="toggle-btn" onclick="login()">Log In</button>
                 <button type="button" class="toggle-btn"onclick="register()">Sign Up</button>
             </div>
-            
+            <!------ login --------->
             <form class="input-group" id="login">
                 <input type="text" class="input-field" placeholder="user Id"required>
                 <input type="text" class="input-field" placeholder="Password"required>
@@ -40,7 +36,7 @@
                 <p>---------------------or---------------------</p>
                 <button type="submit" class="submit-btn">Continue with google</button>
             </form>
-            
+            <!------ register --------->
             <form class="input-group" id="register">
                 <input type="text" class="input-field" placeholder="user Id"required>
                 <input type="text" class="input-field" placeholder="Name"required>
