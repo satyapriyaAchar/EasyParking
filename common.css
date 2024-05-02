@@ -1,8 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Poppins',sans-serif;
-    
+    font-family: 'Poppins',sans-serif;    
 }
 .custom-alert{
     position:fixed;
@@ -44,53 +43,10 @@
     outline: none;
     border-radius: 30px;
 }
-.navi{
-    background: black;
-    padding: 5px 10%;
-    display: flex; /* side-by-side */
-    align-items:center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 9999;
+.nav-link{
+    font-size: 20px;
+    margin-left: 15px;
 }
-.logo{
-    width: 80px;
-    height: 40px;
-    border-radius: 5px;
-}
-nav ul li{
-    display: inline-block; /*horizontal allign*/
-    list-style: none;
-    margin: 10px 20px;
-}
-nav ul li a{
-    color: rgb(255, 234, 229);
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    transition: 0.5;
-    position: relative;
-}
-nav ul li a:hover{
-    color: yellow;
-}
-nav ul li a::after{
-    content: '';
-    width: 0;
-    height: 3px;
-    background: red;
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    transition: 0.5s;
-}
-nav ul li a:hover::after{
-    width: 100%;
-    
-}
-
 .header-text{
     margin-top: 0;
     font-size: 30px;
@@ -102,8 +58,6 @@ nav ul li a:hover::after{
     color: #ffb302;
     font-weight: bolder;
 }
-/* ------------------about--------------- */
-
 /* ---------------------------services---------------------- */
  .sub-title{
     text-align: center;
@@ -127,7 +81,6 @@ nav ul li a:hover::after{
     font-size: 50px;
     margin-bottom: 30px;
 }
-
 .services-list div h2{
     font-size: 30px;
     font-weight: 500;
@@ -150,6 +103,7 @@ nav ul li a:hover::after{
     transform: translateY(-10px);
     
 }
+
 /* -------------------contact-------------------- */
 .contact-left h2{
     padding-top: 30px;
@@ -171,11 +125,10 @@ nav ul li a:hover::after{
     display: inline-block;
     transition: transform 0.5s;
 }
-
-
 nav .fa-solid{
     display: none;
 }
+
 /* ---------------------css for small screens---------------- */
 
 @media only screen and (max-width: 575px){
@@ -186,31 +139,6 @@ nav .fa-solid{
     } */
     .header-text h1{
         font-size: 30px;
-    }
-    nav .fa-solid{
-        display: block;
-        font-size: 25px;
-    }
-    nav ul{
-        background: #ff004f;
-        position: fixed;
-        top: 0;
-        right: -200px;
-        width: 200px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right 0.5s;
-    }
-    nav ul li{
-        display: block;
-        margin: 25px;
-    }
-    nav ul .fa-solid{
-        position: absolute;
-        top: 25px;
-        left: 25px;
-        cursor: pointer;
     }
     .sub-title{
         font-size: 40px;

@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>EasyParking</title>
     
-    <link rel="stylesheet" href="common.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/2285a15cc8.js" crossorigin="anonymous"></script>
+    <?php require('inc/links.php');?>
 </head>
 <body>
 
@@ -65,7 +62,7 @@
   <br><br><br>
 <!-- --------- Parking -------------- -->
 <div id="Parking" class="pt-5">
-  <div class="container shadow p-3 mb-5 bg-body rounded">
+  <div class="container p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5 ">Parking</h1>
     <div class="row">
       <?php
@@ -147,7 +144,7 @@
   
 ?>
 <div id="about" class="pt-5">
-  <div class="container shadow p-3 mb-5 bg-body rounded">
+  <div class="container p-3 mb-5 bg-body rounded">
     <div class="row2">
       <h1 class="sub-title mt-5 mb-5">About This Website</h1>
       <p><?php echo $about_r['site_about']?></p>
@@ -157,7 +154,7 @@
 
 <!--------services section--------------->
 <div id="services" class="pt-5">
-  <div class="container shadow p-3 mb-5 bg-body rounded">
+  <div class="container p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5">Our Services</h1>
     <div class="services-list">
       <?php
@@ -182,7 +179,7 @@
 
 <!-----------faq section------------------>
 <div id="question" class="pt-5">
-  <div class="container shadow p-3 mb-5 bg-body rounded">
+  <div class="container p-3 mb-5 bg-body rounded">
     <h1 class="sub-title mt-5 ">Frequently Asked Questions</h1>
     <div class="accordion mt-5" id="accordionExample">
       <div class="accordion-item">
@@ -268,7 +265,7 @@
   $contact_r = mysqli_fetch_assoc(select($contact_q,$values,'i'));
 ?>
 <div id="contact" class="pt-5">
-  <div class="container shadow p-3 mb-5 bg-body rounded">
+  <div class="container p-3 mb-5 bg-body rounded">
     <div class="row2">
       <div class="contact-left">
         <h1 class="sub-title mt-5">Contact Us</h1>
