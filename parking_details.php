@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyParking-Parking Details</title>
     <?php require('inc/links.php');?>
-    <?php 
-        require('admin/inc/db_config.php');
-        require('admin/inc/essential.php');
-    ?>
+    
 </head>
-
-
 
 <body class="bg-light">
 
+<?php require('inc/header.php');?>
 
     <?php
 
@@ -36,7 +32,7 @@
 
     ?>
 <!---------------- nav-bar ---------------->
-<nav class="navi">
+<!-- <nav class="navi">
         <a href="index.php"><img src="images/logo.png" class="logo"></a>
         <ul id="sidemenu">
             <i class="fa-solid fa-house" style="color: azure;"></i>
@@ -45,7 +41,9 @@
         </ul>
         <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         
-</nav>
+</nav> -->
+
+
 
 <!---------------- parking --------------->
 <div class="container">
@@ -62,7 +60,7 @@
         </div>
 
 
-        <div class="col-lg-7 col-md-12 px-4">
+        <div class="col-lg-6 col-md-12 px-4">
             <div id="parkingCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <?php
@@ -108,7 +106,7 @@
         </div>
 
 
-        <div class="col-lg-5 col-md-12 px-4">
+        <div class="col-lg-6 col-md-12 px-4">
           <div class="card mb-4 border-0 shadow-sm rounded-3">
             <div class="card-body">
                 <?php
