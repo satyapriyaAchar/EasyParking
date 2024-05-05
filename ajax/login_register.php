@@ -13,7 +13,7 @@
             "text/html", 
             "
                 Click the link to confirm you email: <br>
-                <a href='".SITE_URL."email_confirm.php?email=$uemail&token=$token"."'>
+                <a href='".SITE_URL."email_confirm.php?email_confirmation&email=$uemail&token=$token"."'>
                     CLICK ME
                 </a>
             "
@@ -43,7 +43,7 @@
 
         // check user exists or not4
 
-        $u_exist = select("SELECT * FROM `user_cred` WHERE `email` = ? AND `phonenum` = ? LIMIT 1",
+        $u_exist = select("SELECT * FROM `user_cred` WHERE `email` = ? OR `phonenum` = ? LIMIT 1",
             [$data['email'],$data['phonenum']],"ss");
 
         if(mysqli_num_rows($u_exist)!=0){

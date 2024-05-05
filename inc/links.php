@@ -9,4 +9,13 @@
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
 />
 
+<?php
+  require('admin/inc/db_config.php');
+  require('admin/inc/essential.php');
+
+  $settings_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
+  $values = [1];
+  $settings_r = mysqli_fetch_assoc(select($settings_q,$values,'i'));
+?>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
