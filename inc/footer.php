@@ -10,6 +10,34 @@
 </div>  
 
 <script>
+
+    function alert(type,msg,position='body')
+    {
+        let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';
+        let element = document.createElement('div');
+        element.innerHTML =`
+            <div class="alert ${bs_class}  alert-dismissible fade show " role="alert">
+                <strong class="me-3">${msg}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `;
+
+        if(position == 'body')
+        {
+            document.body.append(element);
+            element.classList.add('custom-alert');
+        }
+        else{
+            document.getElementById(position).appendChild(element);
+        }
+        
+        setTimeout(remAlert,3000);
+    }
+
+    function remAlert(){
+        document.getElementsByClassName('alert')[0].remove();
+    }
+
     let register_form = document.getElementById('register-form');
 
     register_form.addEventListener('submit',(e)=>{
@@ -34,6 +62,32 @@
         xhr.open("POST","ajax/login_register.php",true);
 
         xhr.onload = function(){
+            if(this.responseText == 'pass_mismatch'){
+                alert('error',"Password Mismatch");
+            }
+            else if(this.responseText == 'email_already'){
+                alert('error',"Email is already registered");
+            }
+            else if(this.responseText == 'phone_already'){
+                alert('error',"Phone number is already registered");
+            }
+            else if(this.responseText == 'inv_img'){
+                alert('error',"only jpg,jpeg,png & webp are allowed");
+            }
+            else if(this.responseText == 'upd_failed'){
+                alert('error',"Image upload failed");
+            }
+            else if(this.responseText == 'mail_failed'){
+                alert('error',"cannot send confirmation mail! server down");
+            }
+            else if(this.responseText == 'ins_failed'){
+                alert('error',"registration failed! server down");
+            }
+            else{
+               
+                alert('success',"Registration successful.. confirmation sent to email");
+                register_form.reset();
+            }
         }
         xhr.send(data);
 
