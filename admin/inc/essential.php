@@ -6,6 +6,7 @@ define('SITE_URL','http://127.0.0.1/EasyParking/');
 // define('ABOUT_IMG_PATH',SITE_URL.'images');
 define('SERVICES_IMG_PATH',SITE_URL.'images/services/');
 define('PARKING_IMG_PATH',SITE_URL.'images/parking/');
+define('USERS_IMG_PATH',SITE_URL.'images/users/');
 
 
 // backend upload process needs this data
@@ -18,7 +19,8 @@ define('USERS_FOLDER','users/');
 
 //sendgrid api key
 define('SENDGRID_API_KEY',"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");
-
+define('SENDGRID_EMAIL',"satyapriyaachar111@gmail.com");
+define('SENDGRID_NAME',"EasyParking");
 
 
 function adminLogin()
