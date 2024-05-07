@@ -182,4 +182,23 @@
         }
     }
 
+    if(isset($_POST['recover_user']))
+    {
+        $data = filteration($_POST);
+        $enc_pass = password_hash($data['pass'],PASSWORD_BCRYPT);
+
+        $query = "UPDATE `user_cred` SET `password`=?, `token`=?, `t_expire`=? 
+            WHERE `email`=? AND `token`=?";
+        
+        $values = [$enc_pass,null,null,$data['email'],$data['token']];
+
+        if(update($query,$values,'sssss'))
+        {
+            echo 1;
+        }
+        else{
+            echo 'failed';
+        }
+
+    }
 ?>
