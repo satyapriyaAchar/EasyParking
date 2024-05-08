@@ -128,7 +128,14 @@
                 alert('error',"Invalid Password!");
             }
             else{ 
+                let fileurl = window.location.href.split('/').pop().split('?').shift();
+                if(fileurl == 'parking_details.php')
+                {
+                    window.location = window.location.href;
+                }
+                else{
                 window.location = window.location.pathname;
+                }
             }
         }
         xhr.send(data);
@@ -176,6 +183,17 @@
         }
         xhr.send(data);
     });  
+
+
+    function checkLoginToBook(status,parking_id)
+    {
+        if(status){
+            window.location.href = 'confirm_booking.php?id='+parking_id;
+        }
+        else{
+            alert('error','Please login to book parking');
+        }
+    }
     
 
 </script>

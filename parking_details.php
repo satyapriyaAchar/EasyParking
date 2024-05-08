@@ -146,9 +146,14 @@
                     services;
 
                     if(!$settings_r['shutdown']){
-                        echo<<<book
-                            <a href='#' class='btn btn-primary w-100 shadow-none mb-2'>Book Now</a>
-                        book;
+                        $login = 0;
+                            if(isset($_SESSION['login']) && $_SESSION['login']==true)
+                            {
+                                $login = 1;
+                            }
+                            echo<<<book
+                                <button onclick='checkLoginToBook($login,$parking_data[id])' class='btn btn-primary w-100 shadow-none mb-2'>Book Now</button>
+                            book;
                     }
                 ?>
             </div>

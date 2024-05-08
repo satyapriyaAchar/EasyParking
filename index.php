@@ -98,7 +98,12 @@
             $book_btn ="";
 
             if(!$settings_r['shutdown']){
-              $book_btn ="<a href='#' class='btn btn-primary shadow-none'>Book Now</a>";
+              $login = 0;
+              if(isset($_SESSION['login']) && $_SESSION['login']==true)
+              {
+                $login = 1;
+              }
+              $book_btn ="<button onclick='checkLoginToBook($login,$parking_data[id])' class='btn btn-primary shadow-none'>Book Now</button>";
             }
 
             //dynamic display parking card
@@ -339,7 +344,7 @@
     }
    }
 ?> 
-<!-- Password reset modal -->
+  <!-- Password reset modal -->
 
   <div class="modal fade" id="recoveryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -368,8 +373,6 @@
         </div>
     </div>
   </div>
-
-
 
 <!----------- footer section ---------------->
 <?php require('inc/footer.php');?>
