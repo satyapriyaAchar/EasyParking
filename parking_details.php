@@ -49,7 +49,7 @@
 <div class="container">
     <div class="row">
 
-    <!----------------- title ---------------->
+        <!----------------- title ---------------->
         <div class="col-12 my-5 mb-4 px-4">
             <h2 class="fw-bold"><?php echo $parking_data['name']?></h2>
             <div style="font-size: 14px;">
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-
+        <!-- thumbnail -->
         <div class="col-lg-6 col-md-12 px-4">
             <div id="parkingCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -105,6 +105,7 @@
             </div>
         </div>
 
+        <!-- card body -->
 
         <div class="col-lg-6 col-md-12 px-4">
           <div class="card mb-4 border-0 shadow-sm rounded-3">
@@ -144,17 +145,18 @@
                         </div>
                     services;
 
-                    echo<<<book
-                        <a href="#" class="btn btn-primary w-100 shadow-none mb-2">Book Now</a>
-                    book;
-
+                    if(!$settings_r['shutdown']){
+                        echo<<<book
+                            <a href='#' class='btn btn-primary w-100 shadow-none mb-2'>Book Now</a>
+                        book;
+                    }
                 ?>
             </div>
           </div>
         </div>
 
 
-        <!------------ Card ------------->
+        <!------------ Card rating ------------->
         <div class="col-12 mt-4 px-4">
             <div class="mb-5">
                 <h5>Description</h5>

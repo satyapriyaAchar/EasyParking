@@ -95,6 +95,12 @@
                 $parking_thumb = PARKING_IMG_PATH.$thumb_res['image'];
             }
 
+            $book_btn ="";
+
+            if(!$settings_r['shutdown']){
+              $book_btn ="<a href='#' class='btn btn-primary shadow-none'>Book Now</a>";
+            }
+
             //dynamic display parking card
             echo <<<data
               <div class="col-lg-4 col-md-6 my-3">
@@ -117,7 +123,7 @@
                         </span>  
                         </div>
                     <div class="d-flex justify-content-evenly mb-2">
-                    <a href="#" class="btn btn-primary shadow-none">Book Now</a>
+                    $book_btn
                     <a href="parking_details.php?id=$parking_data[id]" class="btn btn-sm btn-outline-dark pt-2 shadow-none">More details</a>
                     </div>
                     </div>

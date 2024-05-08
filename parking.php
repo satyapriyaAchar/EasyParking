@@ -108,7 +108,12 @@
                         $thumb_res = mysqli_fetch_assoc($thumb_q);
                         $parking_thumb = PARKING_IMG_PATH.$thumb_res['image'];
                     }
-                //dynamic display parking card
+                    $book_btn ="";
+
+                    if(!$settings_r['shutdown']){
+                    $book_btn ="<a href='#' class='btn btn-primary w-100 shadow-none mb-2'>Book Now</a>";
+                    }
+                    //dynamic display parking card
                     echo <<<data
                         <div class="card mb-4 border-0 shadow">
                             <div class="row g-0 p-3 align-items-center">
@@ -133,7 +138,7 @@
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <h6 class="mb-4">₹$parking_data[price] per Hour</h6>
-                                    <a href="#" class="btn btn-primary w-100 shadow-none mb-2">Book Now</a>
+                                    $book_btn
                                     <a href="parking_details.php?id=$parking_data[id]" class="btn btn-sm w-100 btn-outline-dark pt-2 shadow-none">More details</a>
                                 </div>
                             </div>

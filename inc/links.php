@@ -19,6 +19,16 @@
   $settings_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
   $values = [1];
   $settings_r = mysqli_fetch_assoc(select($settings_q,$values,'i'));
+
+  if($settings_r['shutdown']){
+    echo<<<alertbar
+      <div class='bg-danger text-center p-2 fw-bold'>
+        <i class="bi bi-tools"></i>
+        Booking are temporarily closed now 
+        <i class="bi bi-gear-fill"></i>
+      </div>
+      alertbar;
+  }
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
