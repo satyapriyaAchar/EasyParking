@@ -108,6 +108,7 @@
                         $thumb_res = mysqli_fetch_assoc($thumb_q);
                         $parking_thumb = PARKING_IMG_PATH.$thumb_res['image'];
                     }
+                    
                     $book_btn ="";
 
                     if(!$settings_r['shutdown']){
