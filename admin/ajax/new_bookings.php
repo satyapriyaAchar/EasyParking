@@ -11,7 +11,7 @@
         $query = "SELECT bo.*,bd.* FROM `booking_order` bo
             INNER JOIN `booking_details` bd ON bo.booking_id = bd.booking_id
             WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ?)
-            AND (bo.booking_status = ? AND bo.arrival = 0) ORDER BY bo.booking_id ASC";
+            AND (bo.booking_status = ? AND bo.arrival = ?) ORDER BY bo.booking_id ASC";
 
         $res = select($query,
             ["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","booked",0],'sssss');
@@ -40,8 +40,6 @@
                         <b>Name :</b> $data[user_name]
                         <br>
                         <b>Phone :</b> $data[phonenum]
-                        <br>
-                        <b>Name :</b> $data[user_name]
                     </td>
                     <td>
                         <b>Parking :</b> $data[parking_name]
@@ -93,9 +91,9 @@
     {
         $frm_data = filteration($_POST);
 
-        $query = "UPDATE `booking_order` SET `booking_status`=?, `refund`=? WHERE bo.booking_id = ?";
+        $query = "UPDATE `booking_order` SET `booking_status`=?, `refund`=? WHERE booking_id = ?";
         $value = ['cancelled',0,$frm_data['booking_id']];
-        $res = update($query,$value,'ssi');
+        $res = update($query,$value,'sii');
 
         echo $res;
        
