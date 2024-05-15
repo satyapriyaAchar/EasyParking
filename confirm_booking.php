@@ -181,7 +181,7 @@
                     {
                         pay_info.innerText = "Checkin date is earlier than today's date!";
                     }
-                    else if(data.status == 'unvailable')
+                    else if(data.status == 'unavailable')
                     {
                         pay_info.innerText = "parking not available";
                     }

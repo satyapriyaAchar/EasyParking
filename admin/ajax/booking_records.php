@@ -15,8 +15,8 @@
         $query = "SELECT bo.*,bd.* FROM `booking_order` bo
             INNER JOIN `booking_details` bd ON bo.booking_id = bd.booking_id
             WHERE ((bo.booking_status = 'booked' AND bo.arrival = 1) 
-            OR (bo.booking_status='cancelled' AND bo.refund=1)
-            OR (bo.booking_status='payment failed'))
+            OR (bo.booking_status = 'cancelled' AND bo.refund=1)
+            OR (bo.booking_status = 'payment failed'))
             AND (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ?)
             ORDER BY bo.booking_id DESC";
 
@@ -103,7 +103,7 @@
             
             $disabled =($page==$total_pages) ? "disabled" : "";
             $next = $page+1;
-            $pagination .="<li class='page-item $disabled'><button onclick='change_page($prev)' class='page-link shadow-none'>Previous</button></li>";
+            $pagination .="<li class='page-item $disabled'><button onclick='change_page($next)' class='page-link shadow-none'>Next</button></li>";
 
 
             if($page!=$total_pages){

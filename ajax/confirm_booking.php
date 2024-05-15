@@ -35,9 +35,31 @@
         }
         else{
             session_start();
-            $_SESSION['parking'];
+           
+
 
             //run query to check parking is available or not
+
+            $tb_query = "SELECT COUNT(*) AS `total_bookings` FROM `booking_order` WHERE 
+            `booking_status`=? AND parking_id=?
+             AND check_out > ? AND check_in < ? ";
+
+             $values = ['booked',$_SESSION['parking']['id'],$frm_data['check_in'],$frm_data['check_out']];
+
+             $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'siss'));
+
+             $rq_result = select("SELECT `quantity` FROM `parking` WHERE `id`=?",[$_SESSION['parking']['id']],'i');
+             $rq_fetch = mysqli_fetch_assoc($rq_result);
+
+             if(($rq_fetch['quantity']-$tb_fetch['total_bookings']) == 0)
+             {
+                $status = 'unavailable';
+                $result = json_encode(['status'=>$status]);
+                echo $result;
+                exit;
+             }
+
+             
 
             $count_days = date_diff($checkin_date,$checkout_date)->days;
             $payment = $_SESSION['parking']['price'] * $count_days;
