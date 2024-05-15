@@ -18,7 +18,7 @@
             OR (bo.booking_status='cancelled' AND bo.refund=1)
             OR (bo.booking_status='payment failed'))
             AND (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ?)
-            AND  ORDER BY bo.booking_id DESC";
+            ORDER BY bo.booking_id DESC";
 
         $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'sss');
         $limit_query = $query ." LIMIT $start,$limit";
@@ -37,7 +37,7 @@
         $table_data = "";
         while($data = mysqli_fetch_assoc($limit_res))
         {
-            $data = date("d-m-Y",strtotime($data['datentime']));
+            $date = date("d-m-Y",strtotime($data['datentime']));
             $checkin = date("d-m-Y",strtotime($data['check_in']));
             $checkout = date("d-m-Y",strtotime($data['check_out']));
 

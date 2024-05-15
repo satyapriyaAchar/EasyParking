@@ -25,7 +25,7 @@
 
         while($data = mysqli_fetch_assoc($res))
         {
-            $data = date("d-m-Y",strtotime($data['datentime']));
+            $date = date("d-m-Y",strtotime($data['datentime']));
             $checkin = date("d-m-Y",strtotime($data['check_in']));
             $checkout = date("d-m-Y",strtotime($data['check_out']));
 

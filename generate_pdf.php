@@ -1,12 +1,16 @@
 <?php
-    require('inc/essential.php');
-    require('inc/db_config.php');
-    require('inc/mpdf/vendor/autoload.php');
+    require('admin/inc/essential.php');
+    require('admin/inc/db_config.php');
+    require('admin/inc/mpdf/vendor/autoload.php');
     
-    require_once __DIR__ . '/vendor/autoload.php';
+   session_start();
+
+   if(!(isset($_SESSION['login']) && $_SESSION['login']==true))
+    {
+        redirect('index.php');
+    }
 
 
-    adminLogin();
 
     if(isset($_GET['gen_pdf']) && isset($_GET['id']))
     {
@@ -26,7 +30,7 @@
 
             if($total_rows==0)
             {
-                header('location: dashboard.php');
+                header('location: index.php');
                 exit;
             }
 
@@ -105,7 +109,7 @@
     }
     else
     {
-        header('location: dashboard.php');
+        header('location: index.php');
     }
 
 ?>

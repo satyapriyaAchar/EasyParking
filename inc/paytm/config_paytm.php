@@ -1,9 +1,9 @@
 <?php
 
 	define('PAYTM_ENVIRONMENT', 'TEST'); // PROD
-	define('PAYTM_MERCHANT_KEY', 'xxxxxxxxxxxxxxxxxxxxxxxx'); //Change this constant's value with Merchant key received from Paytm.
-	define('PAYTM_MERCHANT_MID', 'xxxxxxxxxxxxxxxxxxxxxxx'); //Change this constant's value with MID (Merchant ID) received from Paytm.
-	define('PAYTM_MERCHANT_WEBSITE', 'xxxxxxx'); //Change this constant's value with Website name received from Paytm.
+	define('PAYTM_MERCHANT_KEY', 'all&MRLBLOrmuDGD'); //Change this constant's value with Merchant key received from Paytm.
+	define('PAYTM_MERCHANT_MID', 'tkOskL16930420179530'); //Change this constant's value with MID (Merchant ID) received from Paytm.
+	define('PAYTM_MERCHANT_WEBSITE', 'WEBSTAGING'); //Change this constant's value with Website name received from Paytm.
 	define('INDUSTRY_TYPE_ID', 'Retail'); //Change this constant with website industry type given by paytm
 	define('CHANNEL_ID', 'WEB'); //Change this constant with website channel id
 	define('CALLBACK_URL', 'http://localhost/EasyParking/pay_response.php'); //Change this constant with callback url
