@@ -70,7 +70,7 @@
                 <form id="profile-form">
                     <h5 class="mb-3 fw-bold">Picture</h5>
                     <img src="<?php echo USERS_IMG_PATH.$u_fetch['profile'] ?>" class="rounded-circle img-fluid mb-3">
-                    
+                    <br>
                     <label class="form-label">New Picture</label>
                     <input name="profile" type="file" accept=".jpg, .jpeg, .png, .webp" class="mb-4 form-control shadow-none">   
                     

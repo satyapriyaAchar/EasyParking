@@ -116,13 +116,28 @@
                      <h4>₹$parking_data[price] per Hour</h4>
                     price;
 
+                    $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
+                        WHERE `parking_id`='$parking_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
+
+                    $rating_res = mysqli_query($con,$rating_q);
+                    $rating_fetch = mysqli_fetch_assoc($rating_res);
+
+                    $rating_data = "";
+
+                    if($rating_fetch['avg_rating']!=NULL)
+                    {
+                        for($i=0; $i< $rating_fetch['avg_rating']; $i++)
+                        {                    
+                            $rating_data .="<i class='bi bi-star-fill text-warning'></i> ";
+                        }
+                    }
+                    else
+                    {
+                        $rating_data .= "<p class='text-warning'>No reviews Yet!</p>";            
+                    }
+
                     echo<<<rating
-                        <span class="badge rounded-pill bg-light mb-3">
-                            <i class="fa-solid fa-star text-warning"></i>
-                            <i class="fa-solid fa-star text-warning"></i>
-                            <i class="fa-solid fa-star text-warning"></i>
-                            <i class="fa-solid fa-star text-warning"></i>
-                        </span>
+                       $rating_data
                     rating;
 
                     
@@ -171,21 +186,47 @@
             </div>
             <div>
                 <h5 class="mb-3">Review & Rating</h5>
-                <div>
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="" alt="" width="30px">
-                        <h6 class="m-0 ms-2">Random user1</h6>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus rem quos dolores vero ullam vitae laudantium earum odit eveniet autem officiis tempore excepturi architecto debitis, voluptatibus, ducimus illum eum veritatis!</p>
-                    <div class="rating">
-                        <span class="badge rounded-pill bg-light">
-                            <i class="fa-solid fa-star text-warning"></i>
-                            <i class="fa-solid fa-star text-warning"></i>
-                            <i class="fa-solid fa-star text-warning"></i>
-                            <i class="fa-solid fa-star text-warning"></i>
-                        </span> 
-                    </div> 
-                </div>
+                <?php
+                    $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, p.name AS rname FROM `rating_review` rr 
+                    INNER JOIN `user_cred` uc ON rr.user_id = uc.id
+                    INNER JOIN `parking` p ON rr.parking_id = p.id 
+                    WHERE rr.parking_id = '$parking_data[id]'                       
+                    ORDER BY `sr_no` DESC LIMIT 15";
+
+                    $review_res = mysqli_query($con,$review_q);
+                    $img_path = USERS_IMG_PATH;
+
+                    if(mysqli_num_rows($review_res)==0)
+                    {
+                        echo<<<reviews
+                             <p class='text-warning'>No reviews Yet!</p>
+                             reviews;
+                    }
+                    else{
+                        while($row = mysqli_fetch_assoc($review_res))
+                        {
+                            $stars = "<i class='bi bi-star-fill text-warning'></i> ";
+                            for($i=1; $i< $row['rating']; $i++)
+                            {                    
+                                $stars .="<i class='bi bi-star-fill text-warning'></i> ";
+                            }
+                            echo<<<reviews
+                                <div class="mb-4">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <img src="$img_path$row[profile]" class="rounded-circle" loading="lazy" width="30px">
+                                        <h6 class="m-0 ms-2">$row[uname]</h6>
+                                    </div>
+                                    <p class="mb-1">$row[review]</p>
+                                    <div>
+                                        $stars
+                                    </div> 
+                                </div>
+                            reviews;
+                        }
+                    }
+                ?>
+
+                
             </div>
         
         </div>

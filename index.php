@@ -106,6 +106,40 @@
               $book_btn ="<button onclick='checkLoginToBook($login,$parking_data[id])' class='btn btn-primary shadow-none'>Book Now</button>";
             }
 
+            $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
+              WHERE `parking_id`='$parking_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
+
+            $rating_res = mysqli_query($con,$rating_q);
+            $rating_fetch = mysqli_fetch_assoc($rating_res);
+
+            $rating_data = "";
+
+            if($rating_fetch['avg_rating']!=NULL)
+            {
+              $rating_data = "<div class='rating mb-4'>
+                <h6 class='mb-1'>Rating</h6>
+                <span class='badge rounded-pill bg-light'>
+              ";
+
+              for($i=0; $i< $rating_fetch['avg_rating']; $i++)
+              {                    
+                $rating_data .="<i class='bi bi-star-fill text-warning'></i> ";
+              }
+              $rating_data .="</span>  
+              </div>";
+            }
+            else
+            {
+              $rating_data = "<div class='rating mb-4'>
+              <h6 class='mb-1'>Rating</h6>
+              <span class='badge rounded-pill bg-light pt-2'>
+               <p class='text-warning'>No reviews Yet!</p>
+               </span>  
+              </div>
+              ";            
+            }
+
+
             //dynamic display parking card
             echo <<<data
               <div class="col-lg-4 col-md-6 my-3">
@@ -118,15 +152,7 @@
                       <h6 class="mb-1">Services</h6>
                       $services_data
                     </div>
-                        <div class="rating mb-4">
-                        <h6 class="mb-1">Rating</h6>
-                        <span class="badge rounded-pill bg-light">
-                        <i class="fa-solid fa-star text-warning"></i>
-                        <i class="fa-solid fa-star text-warning"></i>
-                        <i class="fa-solid fa-star text-warning"></i>
-                        <i class="fa-solid fa-star text-warning"></i>
-                        </span>  
-                        </div>
+                    $rating_data
                     <div class="d-flex justify-content-evenly mb-2">
                     $book_btn
                     <a href="parking_details.php?id=$parking_data[id]" class="btn btn-sm btn-outline-dark pt-2 shadow-none">More details</a>
@@ -186,6 +212,34 @@
     </div>
   </div>
 </div>
+
+<!--------testimonial--------------->
+<!-- <div id="testimonial" class="pt-5">
+  <div class="container p-3 mb-5 bg-body rounded">
+    <h1 class="sub-title mt-5">Testimonial</h1>
+    <div class="swiper swiper-testimonials">
+      <div class="swiper-wrapper mb-5">
+        <div class="swiper-slide bg-white p-4">
+          <div class="profile d-flex align-item-center mb-3">
+            <img src="images/services/IMG_37766.svg" width="30px">
+            <h6 class="m-0 ms-2">USer 1</h6>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, aliquid! Doloribus aspernatur officiis quia illum. Cum porro suscipit repellendus voluptate recusandae doloribus molestiae, delectus magni dignissimos molestias velit, voluptatibus accusantium?
+          </p>
+          <div class="rating">
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
 
 <!-----------faq section------------------>
 <div id="question" class="pt-5">

@@ -40,6 +40,9 @@
                     <a class="nav-link text-white" href="user_queries.php">User Queries</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white" href="rate_review.php">Ratings & Review</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white" href="parking.php">Parking</a>
                 </li>
                 <li class="nav-item">
