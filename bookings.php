@@ -63,9 +63,12 @@
 
                     if($data['arrival']==1)
                     {
-                        $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm  shadow-none'>Download pdf</a>
-                        <button type='button'  class=' btn btn-dark btn-sm  shadow-none'>Rate & Review</button>
-                        ";
+                        $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm  shadow-none'>Download pdf</a>";
+                        if($data['rate_review']==0)
+                        {
+                            $btn.="<button type='button' onclick='review_parking($data[booking_id],$data[parking_id])' data-bs-toggle='modal' data-bs-target='#reviewModal' class=' btn btn-dark btn-sm shadow-none ms-2'>Rate & Review</button>";
+
+                        }
 
                     }
                     else
@@ -122,9 +125,51 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="reviewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="review-form">
+                <div class="modal-header">
+                    <h5 class="modal-title d-flex align-items-center">
+                        <i class="bi bi-chat-square-heart-fill fs-3 me-2"></i>Rate & Review
+                    </h5>
+                    <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Rating</label>
+                        <select class="form-select shadow-none" required name="rating">
+                            <option value="5">Excellent</option>
+                            <option value="4">Good</option>
+                            <option value="3">Fair</option>
+                            <option value="2">Poor</option>
+                            <option value="1">Bad</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Review</label>
+                        <textarea type="text" name="review" rows="3" class="form-control shadow-none" required></textarea>
+                    </div>
+
+                    <input type="hidden" name="booking_id">
+                    <input type="hidden" name="parking_id">
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary shadow-none" >Submit</button>                
+                    </div>
+                </div>   
+            </form>
+        </div>
+    </div>
+</div>
+
 <?php
     if(isset($_GET['cancel_status'])){
         alert('success','Booking Cancelled!');
+    }
+    else if(isset($_GET['review_status'])){
+        alert('success','Thank you for rating & review');
     }
 
 ?>
@@ -134,6 +179,7 @@
     <?php require('inc/footer.php');?>
     
     <script>
+
         function cancel_booking(id)
         {
             if(confirm('Are you sure to cancel booking?'))
@@ -158,6 +204,50 @@
                 xhr.send('cancel_booking&id='+id);
             }
         }
+
+        let review_form = document.getElementById('review-form');
+
+        function review_parking(bid,pid)
+        {
+            review_form.elements['booking_id'].value = bid;
+            review_form.elements['parking_id'].value = pid;
+            
+        }
+
+        review_form.addEventListener('submit',function(e){
+            e.preventDefault;
+
+            let data = new FormData();
+
+            data.append('review_form','');
+            data.append('rating',review_form.elements['rating'].value);
+            data.append('review',review_form.elements['review'].value);
+            data.append('booking_id',review_form.elements['booking_id'].value);
+            data.append('parking_id',review_form.elements['parking_id'].value);
+
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST","ajax/review_parking.php",true);
+            
+            xhr.onload = function()
+            {
+
+                if(this.responseText == 1)
+                {                    
+                    window.location.href = "bookings.php?review_status=true";                    
+                }
+                else{
+                    var myModal = document.getElementById('reviewModal');
+                    var modal = bootstrap.Modal.getInstance(myModal);
+                    modal.hide();
+
+                    alert('error',"Rating & Review Failed");
+                }
+            }
+            xhr.send(data);
+
+
+        });
     </script>
 
 </body>

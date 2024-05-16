@@ -77,11 +77,11 @@
 
         $query = "UPDATE `booking_order` bo INNER JOIN `booking_details` bd
             ON bo.booking_id = bd.booking_id
-            SET bo.arrival = ?, bd.parking_no= ?
+            SET bo.arrival = ?, bo.rate_review = ?, bd.parking_no= ?
             WHERE bo.booking_id = ?";
     
-        $value = [1,$frm_data['parking_no'],$frm_data['booking_id']];
-        $res = update($query,$value,'isi'); // it will update 2 rows so it will return 2
+        $value = [1,0,$frm_data['parking_no'],$frm_data['booking_id']];
+        $res = update($query,$value,'iisi'); // it will update 2 rows so it will return 2
 
         echo ($res==2) ? 1 : 0 ;
 
