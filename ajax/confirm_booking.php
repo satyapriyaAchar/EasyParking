@@ -1,7 +1,6 @@
 <?php
     require('../admin/inc/db_config.php');
     require('../admin/inc/essential.php');
-    require("../inc/sendgrid/sendgrid-php.php");
 
     date_default_timezone_set("Asia/Kolkata");
 
@@ -18,7 +17,11 @@
         $checkin_date = new DateTime($frm_data['check_in']);
         $checkout_date = new DateTime($frm_data['check_out']);
 
-        if($checkout_date < $checkin_date){
+        if($checkout_date = $checkin_date){
+            $status = 'check_in_out_equal';
+            $result = json_encode(["status"=>$status]);
+        }
+        else if($checkout_date < $checkin_date){
             $status = 'check_out_earlier';
             $result = json_encode(["status"=>$status]);
         }

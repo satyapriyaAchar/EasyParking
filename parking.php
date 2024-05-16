@@ -11,20 +11,7 @@
 <body class="bg-light">
 
 <!---------------- nav-bar ---------------->
-<!-- <nav class="navi">
-        <a href="index.php"><img src="images/logo.png" class="logo"></a>
-        <ul id="sidemenu">
-            <i class="fa-solid fa-house" style="color: azure;"></i>
-            <li><a href="index.php">Home</a></li>
-            <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
-        </ul>
-        <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-        
-</nav> -->
 <?php require('inc/header.php');?>
-
-
-
 
 
 <!----------------- title ---------------->
@@ -45,13 +32,14 @@
                     </button>
                     <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filterDropdown">
                         <div class="border bg-light p-3 rounded mb-3">
-                            <h5 class="mb-3" style="font-size:18px">CHECK AVAILABILITY</h5>
-                            <label class="form-label" style="font-weight: 500;">Search</label>
-                            <input class="form-control me-2 mb-3 shadow-none" type="search" placeholder="Search" aria-label="Search">
+                            <h5 class="d-flex align-items-center justify-content-between mb-3" style="font-size:18px">
+                                <span>CHECK AVAILABILITY</span>
+                                <button id="chk_avail_btn" onclick="chk_avail_clear()" class="btn btn-primary btn-sm shadow-none d-none">Reset</button>
+                            </h5>
                             <label class="form-label">Check-in</label>
-                            <input type="date" class="form-control shadow-none mb-3">
+                            <input type="date" class="form-control shadow-none mb-3" id="checkin" onchange="chk_avail_filter()">
                             <label class="form-label">Check-out</label>
-                            <input type="date" class="form-control shadow-none">
+                            <input type="date" class="form-control shadow-none" id="checkout" onchange="chk_avail_filter()">
                         </div>  
                         <div class="border bg-light p-3 rounded mb-3">
                             <h5 class="mb-3" style="font-size:18px">FACILITIES</h5>
@@ -75,111 +63,66 @@
 
 
         <!------------ Card ------------->
-        <div class="col-lg-9 col-md-12 px-4">
-
-            <?php
-                $parking_res = select("SELECT * FROM `parking` WHERE `status`=? AND `removed`=?",[1,0],'ii');
-                
-                while($parking_data = mysqli_fetch_assoc($parking_res))
-                {
-                    //get services of parking
-
-                    $fea_q = mysqli_query($con,"SELECT p.name FROM `services` p 
-                        INNER JOIN `parking_services` pser ON p.id = pser.services_id
-                        WHERE pser.parking_id = '$parking_data[id]'");
-
-                    $services_data = "";
-                    while($fea_row = mysqli_fetch_assoc($fea_q))
-                    {
-                        $services_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
-                            $fea_row[name]
-                        </span>";
-                        
-                    }
-
-                    //get thumbnail of parking
-
-                    $parking_thumb = PARKING_IMG_PATH."thumbnail.png";
-                    $thumb_q = mysqli_query($con,"SELECT * FROM `parking_image` 
-                        WHERE `parking_id`='$parking_data[id]' AND `thumb`='1'");
-
-                    if(mysqli_num_rows($thumb_q)>0)
-                    {
-                        $thumb_res = mysqli_fetch_assoc($thumb_q);
-                        $parking_thumb = PARKING_IMG_PATH.$thumb_res['image'];
-                    }
-                    
-                    $book_btn ="";
-
-                    if(!$settings_r['shutdown']){
-                        $login = 0;
-                        if(isset($_SESSION['login']) && $_SESSION['login']==true)
-                        {
-                            $login = 1;
-                        }
-                        $book_btn ="<button onclick='checkLoginToBook($login,$parking_data[id])' class='btn btn-primary w-100 shadow-none mb-2'>Book Now</button>";
-                    }
-
-                    $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
-                        WHERE `parking_id`='$parking_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
-
-                    $rating_res = mysqli_query($con,$rating_q);
-                    $rating_fetch = mysqli_fetch_assoc($rating_res);
-
-                    $rating_data = "";
-
-                    if($rating_fetch['avg_rating']!=NULL)
-                    {
-                        $rating_data .= "<div class='rating mb-4'>
-                            <h6 class='mb-1'>Rating</h6>
-                            <span class='badge rounded-pill bg-light'>
-                        ";
-                        for($i=0; $i< $rating_fetch['avg_rating']; $i++)
-                        {                    
-                            $rating_data .="<i class='bi bi-star-fill text-warning'></i> ";
-                        }
-                        $rating_data .="</span>  
-                        </div>";
-                    }
-                    else
-                    {
-                        $rating_data .= "<div class='rating mb-4'>
-                        <h6 class='mb-1'>Rating</h6>
-                        <span class='badge rounded-pill bg-light pt-2'>
-                        <p class='text-warning'>No reviews Yet!</p>
-                        </span>  
-                        </div>
-                        ";            
-                    }
-
-                    //dynamic display parking card
-                    echo <<<data
-                        <div class="card mb-4 border-0 shadow">
-                            <div class="row g-0 p-3 align-items-center">
-                                <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                                    <img src="$parking_thumb" class="img-fluid rounded">
-                                </div>
-                                <div class="col-md-5 px-lg-5 px-md-5 px-0">
-                                    <h5 class="mb-3">$parking_data[name]</h5>
-                                    <div class="features mb-3">
-                                        <h6 class="mb-1">Services</h6>
-                                        $services_data
-                                    </div>
-                                    $rating_data
-                                </div>
-                                <div class="col-md-2 text-center">
-                                    <h6 class="mb-4">₹$parking_data[price] per Hour</h6>
-                                    $book_btn
-                                    <a href="parking_details.php?id=$parking_data[id]" class="btn btn-sm w-100 btn-outline-dark pt-2 shadow-none">More details</a>
-                                </div>
-                            </div>
-                        </div>
-                    data;
-                }
-            ?>
+        <div class="col-lg-9 col-md-12 px-4" id="parking-data">
+            
         </div>
     </div>
 </div>
+
+
+<script>
+
+    let parking_data = document.getElementById('parking-data');
+    let checkin = document.getElementById('checkin');
+    let checkout = document.getElementById('checkout');
+    let chk_avail_btn = document.getElementById('chk_avail_btn');
+
+    function fetch_parking()
+    {
+        let chk_avail = JSON.stringify({
+            checkin: checkin.value,
+            checkout: checkout.value
+        });
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET","ajax/parking.php?fetch_parking&chk_avail="+chk_avail,true);
+    
+        xhr.onprogress = function()
+        {
+            parking_data.innerHTML = `<div class="spinner-border text-info mb-3 d-block mx-auto" id="loader" role="status">
+                <span class="visually-hidden">loader</span>
+            </div>`;
+        }
+
+        xhr.onload = function()
+        {
+            parking_data.innerHTML = this.responseText;
+        }
+
+        xhr.send();
+    }
+
+    function chk_avail_filter()
+    {
+        if(checkin.value != '' && checkout.value !=''){
+            fetch_parking();
+            chk_avail_btn.classList.remove('d-none');
+        }
+    }
+    function chk_avail_clear()
+    {
+        checkin.value = '';
+        checkout.value ='';
+        chk_avail_btn.classList.remove('d-none');
+        fetch_parking();
+        
+    }
+
+
+
+
+
+    fetch_parking();
+</script>
 
 <!--------------- footer ----------------->
 <?php require('inc/footer.php');?> 
