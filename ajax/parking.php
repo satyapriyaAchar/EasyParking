@@ -8,8 +8,10 @@
 
     if(isset($_GET['fetch_parking']))
     {
+        //check avail data decode
         $chk_avail = json_decode($_GET['chk_avail'],true);
 
+        //checkin & checkout validation
         if($chk_avail['checkin']!='' && $chk_avail['checkout']!='')
         {
             $today_date = new DateTime(date("Y-m-d"));
@@ -30,6 +32,10 @@
             }
         }
 
+        //wheeler data decode 
+        $wheeler = json_decode($_GET['wheeler'],true);
+        $v_type = ($wheeler['v_type']!='')? $wheeler['v_type'] : ''; 
+
         //count numbers of parking slots and output varibale to parking cards
         $count_parking = 0;
         $output = "";
@@ -39,11 +45,16 @@
         $settings_r = mysqli_fetch_assoc(mysqli_query($con,$settings_q));
 
         //query for parking cards
-        $parking_res = select("SELECT * FROM `parking` WHERE `status`=? AND `removed`=?",[1,0],'ii');
-                
+        if($v_type != ''){
+        $parking_res = select("SELECT * FROM `parking` WHERE `name`=? AND `status`=? AND `removed`=?",[$v_type,1,0],'sii');
+        }   
+        else if($v_type == ''){
+            $parking_res = select("SELECT * FROM `parking` WHERE `status`=? AND `removed`=?",[1,0],'ii'); 
+        }     
         while($parking_data = mysqli_fetch_assoc($parking_res))
         {
         
+            //check availability filter
             if($chk_avail['checkin']!='' && $chk_avail['checkout']!='')
             {
                 $tb_query = "SELECT COUNT(*) AS `total_bookings` FROM `booking_order` WHERE 

@@ -41,7 +41,7 @@
                             <label class="form-label">Check-out</label>
                             <input type="date" class="form-control shadow-none" id="checkout" onchange="chk_avail_filter()">
                         </div>  
-                        <div class="border bg-light p-3 rounded mb-3">
+                        <!-- <div class="border bg-light p-3 rounded mb-3">
                             <h5 class="mb-3" style="font-size:18px">FACILITIES</h5>
                             <div class="mb-2">
                                 <input type="checkbox" id=""f1 class="form-check-input shadow-none me-1">
@@ -55,7 +55,33 @@
                                 <input type="checkbox" id=""f3 class="form-check-input shadow-none me-1">
                                 <label class="form-label" for="f3">Facility three</label>
                             </div>
-                        </div>  
+                        </div>   -->
+
+                        <!---- wheeler ---->
+                        <div class="border bg-light p-3 rounded mb-3">
+                            <h5 class="d-flex align-items-center justify-content-between mb-3" style="font-size:18px">
+                                <span>Wheeler</span>
+                                <button id="wheeler_btn" onclick="wheeler_clear()" class="btn btn-primary btn-sm shadow-none d-none">Reset</button>
+                            </h5>
+                            
+                            <label class="form-label">Vehicle Type</label>
+                            <select name="cars" id="v_type" oninput="wheeler_filter()" >
+                                <option selected value="">Select type</option>
+                                <!-- <option value="Two Wheeler">Two Wheeler</option>
+                                <option value="Three Wheeler">Three Wheeler</option>
+                                <option value="Four Wheeler">Four Wheeler</option>
+                                <option value="Six/more wheeler">Six/more wheeler</option> -->
+                                <?php
+                                    $vname_q = selectAll('parking');
+                                    while($row = mysqli_fetch_assoc($vname_q))
+                                    {
+                                        echo<<<vname
+                                            <option value='$row[name]'>$row[name]</option>
+                                        vname;
+                                    } 
+                                ?>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -77,14 +103,23 @@
     let checkout = document.getElementById('checkout');
     let chk_avail_btn = document.getElementById('chk_avail_btn');
 
+    let wheeler_btn = document.getElementById('wheeler_btn');
+    let v_type = document.getElementById('v_type');
+
     function fetch_parking()
     {
         let chk_avail = JSON.stringify({
             checkin: checkin.value,
             checkout: checkout.value
         });
+
+        let wheeler = JSON.stringify({
+            v_type: v_type.value
+        });
+
+
         let xhr = new XMLHttpRequest();
-        xhr.open("GET","ajax/parking.php?fetch_parking&chk_avail="+chk_avail,true);
+        xhr.open("GET","ajax/parking.php?fetch_parking&chk_avail="+chk_avail+"&wheeler="+wheeler,true);
     
         xhr.onprogress = function()
         {
@@ -116,6 +151,21 @@
         fetch_parking();
         
     }
+    function wheeler_filter()
+    {
+        if(v_type.value == 'Two Wheeler' || v_type.value == 'Three Wheeler' || v_type.value == 'Four Wheeler' || v_type.value == 'Six/more wheeler')
+        {
+            fetch_parking();
+            wheeler_btn.classList.remove('d-none');
+        }
+    }
+    function wheeler_clear()
+    {
+        v_type.value = '';
+        wheeler_btn.classList.add('d-none');
+        fetch_parking();
+    } 
+
 
 
 
