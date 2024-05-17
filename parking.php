@@ -11,7 +11,22 @@
 <body class="bg-light">
 
 <!---------------- nav-bar ---------------->
-<?php require('inc/header.php');?>
+<?php 
+    require('inc/header.php');
+    
+    $checkin_default="";
+    $checkout_default="";
+    $vname_default="";
+
+    if(isset($_GET['check_availability']))
+    {
+        $frm_data = filteration($_GET);
+        $checkin_default = $frm_data['checkin'];
+        $checkout_default = $frm_data['checkout'];
+        $vname_default = $frm_data['vname'];
+
+    }
+?>
 
 
 <!----------------- title ---------------->
@@ -37,9 +52,9 @@
                                 <button id="chk_avail_btn" onclick="chk_avail_clear()" class="btn btn-primary btn-sm shadow-none d-none">Reset</button>
                             </h5>
                             <label class="form-label">Check-in</label>
-                            <input type="date" class="form-control shadow-none mb-3" id="checkin" onchange="chk_avail_filter()">
+                            <input type="date" class="form-control shadow-none mb-3" value="<?php echo $checkin_default?>" id="checkin" onchange="chk_avail_filter()">
                             <label class="form-label">Check-out</label>
-                            <input type="date" class="form-control shadow-none" id="checkout" onchange="chk_avail_filter()">
+                            <input type="date" class="form-control shadow-none" value="<?php echo $checkout_default?>" id="checkout" onchange="chk_avail_filter()">
                         </div>  
                         <!-- <div class="border bg-light p-3 rounded mb-3">
                             <h5 class="mb-3" style="font-size:18px">FACILITIES</h5>
@@ -65,8 +80,8 @@
                             </h5>
                             
                             <label class="form-label">Vehicle Type</label>
-                            <select name="cars" id="v_type" oninput="wheeler_filter()" >
-                                <option selected value="">Select type</option>
+                            <select name="cars" id="v_type"  oninput="wheeler_filter()" >
+                                <option selected value="<?php echo $vname_default?>">Select type</option>
                                 <!-- <option value="Two Wheeler">Two Wheeler</option>
                                 <option value="Three Wheeler">Three Wheeler</option>
                                 <option value="Four Wheeler">Four Wheeler</option>

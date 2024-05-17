@@ -19,34 +19,40 @@
         <h1 class="fs-1 fw-bold shadow" style="color:rgb(0, 247, 128) ">Welcome to EasyParking</h1>
         <h4 style="color: #05eeff;">Park your vehicle easily & securely</h4>
         <br>
-      </div>  
+      </div>
+
+      <!-- checking parking availabilty -->
+
       <div class="container availabilty-form">
         <div class="row">
           <div class="col-lg-12 bg-white shadow p-4 rounded">
             <h5 class="mb-4">Check Parking</h5>
-            <form>
+            <form action="parking.php">
               <div class="row align-items-end">
-                <div class="col-lg-3 mb-3">
-                  <label class="form-label" style="font-weight: 500;">Search</label>
-                  <input class="form-control me-2 shadow-none" type="search" placeholder="Search" aria-label="Search">
-                </div>
-                <div class="col-lg-3 mb-3">
+                <div class="col-lg-4 mb-3">
                   <label class="form-label" style="font-weight: 500;">Check-in</label>
-                  <input type="date" class="form-control shadow-none">
+                  <input type="date" class="form-control shadow-none" name="checkin" required>
+                </div>
+                <div class="col-lg-4 mb-3">
+                  <label class="form-label" style="font-weight: 500;">Check-out</label>
+                  <input type="date" class="form-control shadow-none" name="checkout" required>
                 </div>
                 <div class="col-lg-3 mb-3">
-                  <label class="form-label" style="font-weight: 500;">Check-out</label>
-                  <input type="date" class="form-control shadow-none">
-                </div>
-                <div class="col-lg-2 mb-3">
                   <label class="form-label" style="font-weight: 500;">Vehicle Type</label> 
-                  <select class="form-select shadow-none">
+                  <select class="form-select shadow-none" name="vname">
                       <option selected>choose</option>
-                      <option value="1">2 Wheeler</option>
-                      <option value="2">3 wheeler</option>
-                      <option value="2">4 wheeler</option>
+                      <?php
+                        $vname_q = selectAll('parking');
+                        while($row = mysqli_fetch_assoc($vname_q))
+                        {
+                            echo<<<vname
+                                <option value='$row[name]'>$row[name]</option>
+                            vname;
+                        } 
+                      ?>
                   </select>
                 </div>
+                <input type="hidden" name="check_availability">
                 <div class="col-lg-1 mb-lg-3 mt-2">
                 <button type="submit" class="btn btn-warning shadow-none">Search</button>
                 </div>
