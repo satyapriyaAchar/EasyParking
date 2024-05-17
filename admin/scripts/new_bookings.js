@@ -24,7 +24,7 @@
         // console.log(services_s_form.elements['services_name'].value);
         data.append('parking_no',assign_parking_form.elements['parking_no'].value);
         data.append('booking_id',assign_parking_form.elements['booking_id'].value);    
-        data.append('assign_parking');
+        data.append('assign_parking','');
     
         let xhr = new XMLHttpRequest();
         xhr.open("POST","ajax/new_bookings.php",true);
