@@ -17,7 +17,7 @@
         $checkin_date = new DateTime($frm_data['check_in']);
         $checkout_date = new DateTime($frm_data['check_out']);
 
-        if($checkout_date = $checkin_date){
+        if($checkout_date == $checkin_date){
             $status = 'check_in_out_equal';
             $result = json_encode(["status"=>$status]);
         }
@@ -44,8 +44,7 @@
             //run query to check parking is available or not
 
             $tb_query = "SELECT COUNT(*) AS `total_bookings` FROM `booking_order` WHERE 
-            `booking_status`=? AND parking_id=?
-             AND check_out > ? AND check_in < ? ";
+            `booking_status`=? AND parking_id=? AND check_out > ? AND check_in < ? ";
 
              $values = ['booked',$_SESSION['parking']['id'],$frm_data['check_in'],$frm_data['check_out']];
 
